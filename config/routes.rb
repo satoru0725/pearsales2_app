@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   root to: "products#index"
-  resources :users, only: [:edit, :update]
+  resources :users, only: [:show, :edit, :update]
   resources :customers, only: [:edit, :update]
   
 end

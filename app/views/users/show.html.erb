@@ -1,0 +1,215 @@
+<%= render "shared/header" %>  
+
+  <div class="py-4">
+    <section id="information">
+      <div class="container">
+        <h3 class="mb-3">マイページ</h3>
+        <p>ここには出店者様と、現在出店登録されている商品が表示されます。 </p>
+        <div class="row">
+          <!-- 左側セクション -->
+          <div class="col-md-6">
+            <section id="shop">
+              <h4 class="mb-3">出店者様情報</h4>
+              <!-- 店舗情報の表 -->
+              <table class="table table-hover">
+                <tbody>
+                  <tr>
+                    <th>店名</th>
+                    <td><%= current_user.shop_name%></td>
+                  </tr>
+                  <tr>
+                    <th>郵便番号</th>
+                    <td>〒<%=current_user.postal_code %></td>
+                  </tr>
+                  <tr>
+                    <th>住所</th>
+                    <td><%=current_user.prefecture%>  <%=current_user.city %>  <%=current_user.town %>  <%= current_user.extended_address %></td>
+                  </tr>
+                  <tr>
+                    <th>住所</th>
+                    <td>〒<%=current_user.postal_code %></td>
+                  </tr>
+                  <tr>
+                    <th>TEL</th>
+                    <td><%= current_user.phone_number %></td>
+                  </tr>
+                  <%unless current_user.fax_number == "" %>
+                    <tr>
+                      <th>FAX</th>
+                      <td><%= current_user.fax_number %></td>
+                    </tr>
+                  <% end %>
+                  <tr>
+                    <th>メールアドレス</th>
+                    <td><%= current_user.email %></td>
+                  </tr>
+                  <tr>
+                    <th>氏名(カナ)</th>
+                    <td><%= current_user.last_name_kana %><%= current_user.first_name_kana %></td>
+                  </tr>
+                  <tr>
+                    <th>氏名</th>
+                    <td><%= current_user.last_name %>  <%= current_user.first_name %></td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- /店舗情報の表 -->
+            </section>
+          </div>
+          <!-- /左側セクション -->
+          
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="py-4">
+  <section id="menu">
+    <div class="container">
+      <h3 class="mb-3">商品</h3>
+      <p>現在出品している商品一覧です。</p>
+      <!-- タブ型ナビゲーション -->
+      <div class="nav nav-tabs" id="tab-menus" role="tablist">
+        <!-- タブ01 -->
+        <a class="nav-item nav-link active" id="tab-menu01" data-bs-toggle="tab" href="#panel-menu01" role="tab" aria-controls="panel-menu01" aria-selected="true">観葉植物</a>
+        <!-- タブ02 -->
+        <a class="nav-item nav-link" id="tab-menu02" data-bs-toggle="tab" href="#panel-menu02" role="tab" aria-controls="panel-menu02" aria-selected="false">花木</a>
+        <!-- タブ03 -->
+        <a class="nav-item nav-link" id="tab-menu03" data-bs-toggle="tab" href="#panel-menu03" role="tab" aria-controls="panel-menu03" aria-selected="false">果樹</a>
+        <!-- タブ04 -->
+        <a class="nav-item nav-link" id="tab-menu04" data-bs-toggle="tab" href="#panel-menu04" role="tab" aria-controls="panel-menu04" aria-selected="false">ガーデニング用品</a>
+      </div>
+      <!-- /タブ型ナビゲーション -->
+      <!-- タブパネル -->
+      <div class="tab-content" id="panel-menus">
+        <!-- パネル01 -->
+        <div class="tab-pane fade show active border border-top-0" id="panel-menu01" role="tabpanel" aria-labelledby="tab-menu01">
+          <div class="row p-3">
+            <div class="col-md-7 order-md-2">
+              <h4>観葉植物</h4>
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th>オーガスタ</th>
+                    <td>5,000円（税別）〜</td>
+                  </tr>
+                  <tr>
+                    <th>パキラ</th>
+                    <td>10,000円（税別）〜</td>
+                  </tr>
+                  <tr>
+                    <th>幸福の木</th>
+                    <td>12,000円（税別）〜</td>
+                  </tr>
+                  <tr>
+                    <th>モンステラ</th>
+                    <td>11,000円（税別）〜</td>
+                  </tr>
+                  <tr>
+                    <th>エバーフレッシュ</th>
+                    <td>20,000円（税別）〜</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-5">
+              <img src="img/house_plants.jpg" alt="観葉植物" class="img-fluid"> </div>
+          </div>
+        </div>
+        <!-- パネル02 -->
+        <div class="tab-pane fade border border-top-0" id="panel-menu02" role="tabpanel" aria-labelledby="tab-menu02">
+          <div class="row p-3">
+            <div class="col-md-7 order-md-2">
+              <h4>花木</h4>
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th>アジサイ</th>
+                    <td>5,000円（税別）〜</td>
+                  </tr>
+                  <tr>
+                    <th>コデマリ</th>
+                    <td>10,000円（税別）〜</td>
+                  </tr>
+                  <tr>
+                    <th>カオリバンマツリ</th>
+                    <td>12,000円（税別）〜</td>
+                  </tr>
+                  <tr>
+                    <th>レンギョウ</th>
+                    <td>6,000円（税別）〜</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-5">
+              <img src="img/flowering_trees.jpg" alt="花木" class="img-fluid"> </div>
+          </div>
+        </div>
+        <!-- パネル03 -->
+        <div class="tab-pane fade border border-top-0" id="panel-menu03" role="tabpanel" aria-labelledby="tab-menu03">
+          <div class="row p-3">
+            <div class="col-md-7 order-md-2">
+              <h4>果樹</h4>
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th>みかんの木</th>
+                    <td>10,000円（税別）〜</td>
+                  </tr>
+                  <tr>
+                    <th>レモンの木</th>
+                    <td>12,000円（税別）〜</td>
+                  </tr>
+                  <tr>
+                    <th>キウイの木</th>
+                    <td>11,000円（税別）〜</td>
+                  </tr>
+                  <tr>
+                    <th>スダチの木</th>
+                    <td>13,000円（税別）〜</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-5">
+              <img src="img/fruit_trees.jpg" alt="果樹" class="img-fluid"> </div>
+          </div>
+        </div>
+        <!-- パネル04 -->
+        <div class="tab-pane fade border border-top-0" id="panel-menu04" role="tabpanel" aria-labelledby="tab-menu04">
+          <div class="row p-3">
+            <div class="col-md-7 order-md-2">
+              <h4>ガーデニング用品</h4>
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th>陶器鉢</th>
+                    <td>400円（税別）〜</td>
+                  </tr>
+                  <tr>
+                    <th>木製プランター</th>
+                    <td>1,000円（税別）〜</td>
+                  </tr>
+                  <tr>
+                    <th>剪定バサミ</th>
+                    <td>1,000円（税別）～</td>
+                  </tr>
+                  <tr>
+                    <th>支柱</th>
+                    <td>100円（税別）～</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-5">
+              <img src="img/gardening_tools.jpg" alt="ガーデニング用品" class="img-fluid"> </div>
+          </div>
+        </div>
+      </div>
+      <!-- /タブパネル -->
+    </div>
+  </section>
+</div>
+
+<%= render "shared/footer" %>
