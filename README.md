@@ -10,14 +10,14 @@
 | first_name         | string | null: false               |
 | last_name_kana     | string | null: false               |
 | first_name_kana    | string | null: false               |
-| shop_name          | string | null: false               |
+| shop_name          | string | null: false, unique: true |
 | phone_number       | string | null: false               |
-| fax_number         | string | null: false               |
+| fax_number         | string |                           |
 | postal_code        | string | null: false               |
 | prefecture         | string | null: false               |
 | city               | string | null: false               |
 | town               | string | null: false               |
-| extended_address   | string | null: false               |
+| extended_address   | string |                           |
 
 
 ### Association
@@ -28,6 +28,7 @@
 
 | Column             | Type   | Options                   |
 | ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false, unique: true |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false               |
 | last_name          | string | null: false               |

@@ -10,7 +10,7 @@
             <li class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopus="true" aria-expanded="false">出店者様はこちらから</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">新規登録</a>
+                  <%= link_to '新規登録', new_user_registration_path, class: 'dropdown-item' %>
                   <a class="dropdown-item" href="#">ログイン</a>
                   <a class="dropdown-item" href="#">ログアウト</a>
                 </div>
@@ -67,7 +67,7 @@
         <div class="text-end">
           <button type="button" class="btn btn-light text-dark me-2">Login</button>
           <button type="button" class="btn btn-danger me-2">Logout</button>
-          <button type="button" class="btn btn-primary">Sign-up</button>
+          <%= link_to '新規登録', new_customer_registration_path, class: "btn btn-primary" %>
         </div>
       </div>
     </div>
