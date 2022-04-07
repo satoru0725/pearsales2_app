@@ -12,6 +12,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <% if user_signed_in? %>
                     <%= link_to 'マイページ', "#", class: 'dropdown-item' %>
+                    <%= link_to '個人情報編集', edit_user_registration_path, class: 'dropdown-item' %>
                     <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
                   <% else %>
                     <%= link_to '新規登録', new_user_registration_path, class: 'dropdown-item' %>
@@ -74,6 +75,7 @@
             <% if user_signed_in? %>
               <%= link_to current_user.shop_name, root_path, class: "btn btn-dark text-white me-2" %>
             <% elsif customer_signed_in? %>
+              <%= link_to '個人情報編集', edit_customer_path(current_customer), class: "btn btn-primary" %>
               <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "btn btn-danger me-2" %>
               <%= link_to current_customer.nickname, root_path, class: "btn btn-dark text-white me-2" %>
             <% else %>
