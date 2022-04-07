@@ -10,32 +10,38 @@
             <li class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopus="true" aria-expanded="false">出店者様はこちらから</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <%= link_to '新規登録', new_user_registration_path, class: 'dropdown-item' %>
-                  <a class="dropdown-item" href="#">ログイン</a>
-                  <a class="dropdown-item" href="#">ログアウト</a>
+                  <% if user_signed_in? %>
+                    <%= link_to 'マイページ', "#", class: 'dropdown-item' %>
+                    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+                  <% else %>
+                    <%= link_to '新規登録', new_user_registration_path, class: 'dropdown-item' %>
+                    <%= link_to 'ログイン', new_user_session_path, class: 'dropdown-item' %>
+                  <% end %>
                 </div>
             </li>
-            <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopus="true" aria-expanded="false">売上情報</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">新規作成</a>
-                  <a class="dropdown-item" href="#">一覧</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopus="true" aria-expanded="false">お客さま情報</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">新規作成</a>
-                  <a class="dropdown-item" href="#">一覧</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopus="true" aria-expanded="false">予約情報</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">新規作成</a>
-                  <a class="dropdown-item" href="#">一覧</a>
-                </div>
-            </li>
+            <% if user_signed_in? %>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopus="true" aria-expanded="false">売上情報</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">新規作成</a>
+                    <a class="dropdown-item" href="#">一覧</a>
+                  </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopus="true" aria-expanded="false">お客さま情報</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">新規作成</a>
+                    <a class="dropdown-item" href="#">一覧</a>
+                  </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopus="true" aria-expanded="false">予約情報</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">新規作成</a>
+                    <a class="dropdown-item" href="#">一覧</a>
+                  </div>
+              </li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -65,9 +71,15 @@
           </ul>
 
         <div class="text-end">
-          <button type="button" class="btn btn-light text-dark me-2">Login</button>
-          <button type="button" class="btn btn-danger me-2">Logout</button>
-          <%= link_to '新規登録', new_customer_registration_path, class: "btn btn-primary" %>
+            <% if user_signed_in? %>
+              <%= link_to current_user.shop_name, root_path, class: "btn btn-dark text-white me-2" %>
+            <% elsif customer_signed_in? %>
+              <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "btn btn-danger me-2" %>
+              <%= link_to current_customer.nickname, root_path, class: "btn btn-dark text-white me-2" %>
+            <% else %>
+              <%= link_to '新規登録', new_customer_registration_path, class: "btn btn-primary" %>
+              <%= link_to 'ログイン', new_customer_session_path, class: "btn btn-light text-dark me-2" %>
+            <% end %>
         </div>
       </div>
     </div>
