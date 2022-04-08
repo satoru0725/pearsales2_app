@@ -1,1 +1,107 @@
-<h1 class="text-success">Hello World</h1>
+<%= render "shared/header" %>
+
+<main>
+  <!--本日の出店状況-->
+  <div class="py-4">
+    <section id="opening-information">
+      <div class="container bg-warning bg-gradient ">
+        <div>
+          <p class="text-center">いらっしゃいませ</p>
+        </div>
+        <div>
+          <p class="text-center">本日2022/4/1は10:00から営業を予定しています。</p>
+        </div>
+        <div>
+          <p class="text-center">次回の開店予定は2022/4/3となっております。</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!--/本日の出店状況-->
+
+  <!--メインビジュアル-->
+  <div class="py-4">
+    <div class="container">
+      <div id="main_visual" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-bs-target="#main_visual" data-bs-slide-to="0" class="active"></li>
+          <li data-bs-target="#main_visual" data-bs-slide-to="1"></li>
+          <li data-bs-target="#main_visual" data-bs-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <!--スライド01-->
+          <div class="carousel-item active">
+            <!--1枚目のスライド画像とキャプションが入ります。-->
+            <img class="img-fluid d-block mx-auto w-50" src="image/slide1.jpeg" alt="梨の画像">
+            <div class="carousel-caption d-none d-md-block">
+              <h2>サンプル画像1</h2>
+              <p>画像の説明1</p>
+            </div>
+          </div>
+          <!--/スライド01-->
+          <!--スライド02-->
+          <div class="carousel-item">
+            <!--2枚目のスライド画像とキャプションが入ります。-->
+            <img class="img-fluid d-block mx-auto w-50" src="image/slide1.jpeg" alt="梨の画像">
+            <div class="carousel-caption d-none d-md-block">
+              <h2>サンプル画像2</h2>
+              <p>画像の説明2</p>
+            </div>
+          </div>
+          <!--/スライド02-->
+          <!--スライド03-->
+          <div class="carousel-item">
+            <!--3枚目のスライド画像とキャプションが入ります。-->
+            <img class="img-fluid d-block mx-auto w-50" src="image/slide1.jpeg" alt="梨の画像">
+            <div class="carousel-caption d-none d-md-block">
+              <h2>サンプル画像3</h2>
+              <p>画像の説明3</p>
+            </div>
+          <!--/スライド03-->
+          </div>
+        </div>
+
+        <a class="carousel-control-prev" href="#main_visual" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">前に戻る</span>
+        </a>
+        <a class="carousel-control-next" href="#main_visual" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">次に進む</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!--/メインビジュアル-->
+
+  <!--お知らせ-->
+  <div class="py-4">
+  <div class="py-4">
+    <section id="news">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2">
+            <h3>お知らせ</h3>
+          </div>
+          <div class="col-md-10">
+            <dl class="row">
+              <dt class="col-md-3">2022年○月○日</dt>
+              <dd class="col-md-9">豊水の販売を始めました</dd>
+              <dt class="col-md-3">2022年○月○日</dt>
+              <dd class="col-md-9">幸水の販売を始めました</dd>
+              <dt class="col-md-3">2022年○月○日</dt>
+              <dd class="col-md-9">なつしづくの販売を始めました</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  </div>
+  <!--/お知らせ-->
+
+</main>
+
+
+
+<%= render "shared/footer" %>

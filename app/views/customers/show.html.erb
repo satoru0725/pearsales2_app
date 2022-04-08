@@ -1,0 +1,66 @@
+<%= render "shared/header" %>  
+
+  <div class="py-4">
+    <section id="information">
+      <div class="container">
+        <h3 class="mb-3">マイページ</h3>
+        <p>ここにはご利用者様の個人情報が表示されます。 </p>
+        <div class="row">
+          <!-- 左側セクション -->
+          <div class="col-md-6">
+            <section id="shop">
+              <h4 class="mb-3">お客さま情報</h4>
+              <!-- カスタマー情報表 -->
+              <table class="table table-hover">
+                <tbody>
+                  <tr>
+                    <th>ニックネーム</th>
+                    <td><%= current_customer.nickname%></td>
+                  </tr>
+                  <tr>
+                    <th>郵便番号</th>
+                    <td>〒<%=current_customer.postal_code %></td>
+                  </tr>
+                  <tr>
+                    <th>住所</th>
+                    <td><%=current_customer.prefecture%>  <%=current_customer.city %>  <%=current_customer.town %>  <%= current_customer.extended_address %></td>
+                  </tr>
+                  <tr>
+                    <th>住所</th>
+                    <td>〒<%=current_customer.postal_code %></td>
+                  </tr>
+                  <tr>
+                    <th>TEL</th>
+                    <td><%= current_customer.phone_number %></td>
+                  </tr>
+                  <%unless current_customer.fax_number == "" %>
+                    <tr>
+                      <th>FAX</th>
+                      <td><%= current_customer.fax_number %></td>
+                    </tr>
+                  <% end %>
+                  <tr>
+                    <th>メールアドレス</th>
+                    <td><%= current_customer.email %></td>
+                  </tr>
+                  <tr>
+                    <th>氏名(カナ)</th>
+                    <td><%= current_customer.last_name_kana %><%= current_customer.first_name_kana %></td>
+                  </tr>
+                  <tr>
+                    <th>氏名</th>
+                    <td><%= current_customer.last_name %>  <%= current_customer.first_name %></td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- /カスタマー情報表 -->
+            </section>
+          </div>
+          <!-- /左側セクション -->
+          
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <%= render "shared/footer" %>
