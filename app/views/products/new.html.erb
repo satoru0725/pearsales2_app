@@ -1,0 +1,62 @@
+<%= form_with model: @form, url: products_path, method: :post, local: true do |fb| %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>商品名</th>
+        <th>品種</th>
+        <th>ランク（玉数）</th>
+        <th>商品の重量(kg)</th>
+        <th>送料</th>
+        <th>コメント</th>
+        <th>在庫</th>
+        <th>出品の可否</th>
+      </tr>
+    </thead>
+    <tbody class="bulk-registration-form">
+      <%= fb.fields_for :products do |f| %>
+        <tr class="item">
+          <td>
+            <%= f.label :name,"商品名",id:"date" %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :variety,"品種",id:"date" %>
+            <%= f.text_field :variety, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :rank,"ランク",id:"date" %>
+            <%= f.text_field :rank, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :weight,"重量",id:"date" %>
+            <%= f.text_field :weight, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :price,"単価",id:"date" %>
+            <%= f.text_field :price, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :postage,"送料",id:"date" %>
+            <%= f.text_field :postage, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :remark,"コメント",id:"date" %>
+            <%= f.text_field :remark, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :stock,"在庫",id:"date" %>
+            <%= f.text_field :stock, class: 'form-control' %>
+          </td>
+          <td class="text-center">
+            <%= f.label :suspended,"出品",id:"date" %>
+            <%= f.check_box :suspended, class: 'top10 registration-checkbox' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="text-center">
+    <%= fb.submit '一括登録', class: 'btn btn-primary' %>
+  </div>
+<% end %>

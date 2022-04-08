@@ -46,7 +46,6 @@
 
 ### Association
 
-- has_many :items
 - has_many :products, through: :orders
 
 ## productsテーブル
@@ -67,7 +66,8 @@
 
 ### Association
 
-- has_many :products, through: :orders
+- belongs_to :user
+- has_many :customers, through: :orders
 
 ## ordersテーブル
 
