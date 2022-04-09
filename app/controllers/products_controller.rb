@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
   def create
     @form = Form::ProductCollection.new(product_collection_params)
     if @form.save
-      redirect_to products_path
+      redirect_to user_path(current_user.id)
     else
       render :new
     end

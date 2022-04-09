@@ -63,154 +63,98 @@
     </section>
   </div>
   
+  
+<!--ここから商品一覧-->
+
+
+
 <div class="py-4">
   <section id="menu">
     <div class="container">
       <h3 class="mb-3">商品</h3>
       <p>現在出品している商品一覧です。</p>
+
+      
       <!-- タブ型ナビゲーション -->
       <div class="nav nav-tabs" id="tab-menus" role="tablist">
-        <!-- タブ01 -->
-        <a class="nav-item nav-link active" id="tab-menu01" data-bs-toggle="tab" href="#panel-menu01" role="tab" aria-controls="panel-menu01" aria-selected="true">観葉植物</a>
-        <!-- タブ02 -->
-        <a class="nav-item nav-link" id="tab-menu02" data-bs-toggle="tab" href="#panel-menu02" role="tab" aria-controls="panel-menu02" aria-selected="false">花木</a>
-        <!-- タブ03 -->
-        <a class="nav-item nav-link" id="tab-menu03" data-bs-toggle="tab" href="#panel-menu03" role="tab" aria-controls="panel-menu03" aria-selected="false">果樹</a>
-        <!-- タブ04 -->
-        <a class="nav-item nav-link" id="tab-menu04" data-bs-toggle="tab" href="#panel-menu04" role="tab" aria-controls="panel-menu04" aria-selected="false">ガーデニング用品</a>
+        <% @products_count.each_with_index do | products, i | %>
+          <% i += 1 %>
+          <% if i == 1 %>
+            <!-- タブ01 -->
+            <a class="nav-item nav-link active" id="tab-menu0<%=i%>" data-bs-toggle="tab" href="#panel-menu0<%=1%>" role="tab" aria-controls="panel-menu0<%=i%>" aria-selected="true"><%= products %></a>
+          <% else %>
+            <!-- タブ02 -->
+            <a class="nav-item nav-link" id="tab-menu0<%=i%>" data-bs-toggle="tab" href="#panel-menu0<%=i%>" role="tab" aria-controls="panel-menu0<%=i%>" aria-selected="false"><%= products %></a>
+          <% end %>
+        <% end %>
       </div>
       <!-- /タブ型ナビゲーション -->
+      
       <!-- タブパネル -->
       <div class="tab-content" id="panel-menus">
-        <!-- パネル01 -->
-        <div class="tab-pane fade show active border border-top-0" id="panel-menu01" role="tabpanel" aria-labelledby="tab-menu01">
-          <div class="row p-3">
-            <div class="col-md-7 order-md-2">
-              <h4>観葉植物</h4>
-              <table class="table table-striped">
-                <tbody>
-                  <tr>
-                    <th>オーガスタ</th>
-                    <td>5,000円（税別）〜</td>
-                  </tr>
-                  <tr>
-                    <th>パキラ</th>
-                    <td>10,000円（税別）〜</td>
-                  </tr>
-                  <tr>
-                    <th>幸福の木</th>
-                    <td>12,000円（税別）〜</td>
-                  </tr>
-                  <tr>
-                    <th>モンステラ</th>
-                    <td>11,000円（税別）〜</td>
-                  </tr>
-                  <tr>
-                    <th>エバーフレッシュ</th>
-                    <td>20,000円（税別）〜</td>
-                  </tr>
-                </tbody>
-              </table>
+        <% @products_count.each_with_index do | products, i | %>
+          <% i += 1 %>
+          <% if i == 1 %>
+            <!-- パネル01 -->
+            <div class="tab-pane fade show active border border-top-0" id="panel-menu0<%=i%>" role="tabpanel" aria-labelledby="tab-menu0<%=i%>">
+              <div class="row p-3">
+                <div class="col-md-7 order-md-2">
+                  <h4><%= products %></h4>
+                  <table class="table table-striped">
+                    <tbody>
+                    <% @products.where(variety: products).each do | product | %>
+                      <tr>
+                        <th><%= product.name %></th>
+                        <td><%= product.rank %></td>
+                        <td><%= product.weight %>kg</td>
+                        <td>値段:<%= product.price %>円</td>
+                        <td>送料:<%= product.postage %></td>
+                        <td>備考:<%= product.remark %></td>
+                      </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-5">
+                  <img src="img/house_plants.jpg" alt="<%=products%>" class="img-fluid">
+                </div>
+              </div>
             </div>
-            <div class="col-md-5">
-              <img src="img/house_plants.jpg" alt="観葉植物" class="img-fluid"> </div>
-          </div>
-        </div>
-        <!-- パネル02 -->
-        <div class="tab-pane fade border border-top-0" id="panel-menu02" role="tabpanel" aria-labelledby="tab-menu02">
-          <div class="row p-3">
-            <div class="col-md-7 order-md-2">
-              <h4>花木</h4>
-              <table class="table table-striped">
-                <tbody>
-                  <tr>
-                    <th>アジサイ</th>
-                    <td>5,000円（税別）〜</td>
-                  </tr>
-                  <tr>
-                    <th>コデマリ</th>
-                    <td>10,000円（税別）〜</td>
-                  </tr>
-                  <tr>
-                    <th>カオリバンマツリ</th>
-                    <td>12,000円（税別）〜</td>
-                  </tr>
-                  <tr>
-                    <th>レンギョウ</th>
-                    <td>6,000円（税別）〜</td>
-                  </tr>
-                </tbody>
-              </table>
+          <% else %>
+            <!-- パネル02 -->
+            <div class="tab-pane fade border border-top-0" id="panel-menu0<%=i%>" role="tabpanel" aria-labelledby="tab-menu0<%=i%>">
+              <div class="row p-3">
+                <div class="col-md-7 order-md-2">
+                  <h4><%= products %></h4>
+                  <table class="table table-striped">
+                    <tbody>
+                      <% @products.where(variety: products).each do | product | %>
+                      <tr>
+                        <th><%= product.name %></th>
+                        <td><%= product.rank %></td>
+                        <td><%= product.weight %></td>
+                        <td><%= product.price %></td>
+                        <td><%= product.postage %></td>
+                        <td><%= product.remark %></td>
+                      </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-5">
+                  <img src="img/flowering_trees.jpg" alt="<%=products%>" class="img-fluid"> 
+                </div>
+              </div>
             </div>
-            <div class="col-md-5">
-              <img src="img/flowering_trees.jpg" alt="花木" class="img-fluid"> </div>
-          </div>
-        </div>
-        <!-- パネル03 -->
-        <div class="tab-pane fade border border-top-0" id="panel-menu03" role="tabpanel" aria-labelledby="tab-menu03">
-          <div class="row p-3">
-            <div class="col-md-7 order-md-2">
-              <h4>果樹</h4>
-              <table class="table table-striped">
-                <tbody>
-                  <tr>
-                    <th>みかんの木</th>
-                    <td>10,000円（税別）〜</td>
-                  </tr>
-                  <tr>
-                    <th>レモンの木</th>
-                    <td>12,000円（税別）〜</td>
-                  </tr>
-                  <tr>
-                    <th>キウイの木</th>
-                    <td>11,000円（税別）〜</td>
-                  </tr>
-                  <tr>
-                    <th>スダチの木</th>
-                    <td>13,000円（税別）〜</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-md-5">
-              <img src="img/fruit_trees.jpg" alt="果樹" class="img-fluid"> </div>
-          </div>
-        </div>
-        <!-- パネル04 -->
-        <div class="tab-pane fade border border-top-0" id="panel-menu04" role="tabpanel" aria-labelledby="tab-menu04">
-          <div class="row p-3">
-            <div class="col-md-7 order-md-2">
-              <h4>ガーデニング用品</h4>
-              <table class="table table-striped">
-                <tbody>
-                  <tr>
-                    <th>陶器鉢</th>
-                    <td>400円（税別）〜</td>
-                  </tr>
-                  <tr>
-                    <th>木製プランター</th>
-                    <td>1,000円（税別）〜</td>
-                  </tr>
-                  <tr>
-                    <th>剪定バサミ</th>
-                    <td>1,000円（税別）～</td>
-                  </tr>
-                  <tr>
-                    <th>支柱</th>
-                    <td>100円（税別）～</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="col-md-5">
-              <img src="img/gardening_tools.jpg" alt="ガーデニング用品" class="img-fluid"> </div>
-          </div>
-        </div>
-      </div>
+          <% end %>
+        <% end %>
       <!-- /タブパネル -->
     </div>
   </section>
 </div>
+
+
+
 <div class="text-center">
     <%= link_to '商品の新規出品', new_product_path, class: "btn btn-primary" %>
   </div>
