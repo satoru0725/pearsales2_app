@@ -22,4 +22,7 @@ class User < ApplicationRecord
     validates :first_name_kana
     validates :last_name_kana
   end
+
+  has_many :products, inverse_of: :user, dependent: :destroy
+  accepts_nested_attributes_for :products
 end

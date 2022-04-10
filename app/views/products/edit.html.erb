@@ -1,0 +1,65 @@
+<%= render "shared/header" %>
+
+<%= form_with model: [@user, @product], url: user_product_path(@user.id, params[:id]), local: true do |f| %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>商品名</th>
+        <th>品種</th>
+        <th>ランク（玉数）</th>
+        <th>商品の重量(kg)</th>
+        <th>送料</th>
+        <th>値段</th>
+        <th>コメント</th>
+        <th>在庫</th>
+        <th>出品の可否</th>
+      </tr>
+    </thead>
+    <tbody class="bulk-registration-form">
+        <tr class="item">
+          <td>
+            <%= f.label :name,"商品名",id:"date" %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :variety,"品種",id:"date" %>
+            <%= f.text_field :variety, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :rank,"ランク",id:"date" %>
+            <%= f.text_field :rank, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :weight,"重量",id:"date" %>
+            <%= f.text_field :weight, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :price,"単価",id:"date" %>
+            <%= f.text_field :price, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :postage,"送料",id:"date" %>
+            <%= f.text_field :postage, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :remark,"コメント",id:"date" %>
+            <%= f.text_field :remark, class: 'form-control' %>
+          </td>
+          <td>
+            <%= f.label :stock,"在庫",id:"date" %>
+            <%= f.text_field :stock, class: 'form-control' %>
+          </td>
+          <td class="text-center">
+            <%= f.label :suspended,"出品",id:"date" %>
+            <%= f.check_box :suspended, class: 'top10 registration-checkbox' %>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <div class="text-center">
+    <%= f.submit '編集完了', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<%= render "shared/footer" %>

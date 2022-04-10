@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
 
   def show
+    @user = User.find(params[:id])
+    @products = Product.where(user_id: current_user.id)
+    @products_variety = Product.where(user_id: current_user.id).select(:variety).distinct
+    @products_count = Product.where(user_id: current_user.id).distinct.pluck(:variety)
   end
   def edit
     @user = User.find(params[:id])
