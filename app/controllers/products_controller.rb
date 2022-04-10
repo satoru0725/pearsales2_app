@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
   def index
-    @products = Product.all.order(created_at: :desc).includes(:user)
+    @products_index = Product.all.order(created_at: :desc).includes(:user)
   end
 
   def new
@@ -15,7 +15,21 @@ class ProductsController < ApplicationController
     else
       render :new
     end
+  end
 
+  def edit
+    @user = User.find(params[:user_id])
+    @product = Product.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:user_id])
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      redirect_to user_path(params[:user_id])
+    else
+      render :edit
+    end
   end
 
   private
@@ -28,6 +42,10 @@ class ProductsController < ApplicationController
 
   def product_collection_params
     params.require(:form_product_collection)
-    .permit(products_attributes: [:name, :variety, :rank, :weight, :price, :stock, :postage, :remark, :suspended]).merge(user_id: current_user.id)
+    .permit(products_attributes: [:name, :variety, :rank, :weight, :price, :stock, :postage, :remark, :suspended])
+  end
+
+  def product_params
+    params.require(:product).permit(:name, :variety, :rank, :weight, :price, :stock, :postage, :remark, :suspended).merge(user_id: current_user.id)
   end
 end

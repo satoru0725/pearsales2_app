@@ -1,6 +1,6 @@
 <%= render "shared/header" %>
 
-<%= form_with model: @form, url: user_products_path, method: :post, local: true do |fb| %>
+<%= form_with model: [@user, @product], url: user_product_path(@user.id, params[:id]), local: true do |f| %>
   <table class="table">
     <thead>
       <tr>
@@ -16,7 +16,6 @@
       </tr>
     </thead>
     <tbody class="bulk-registration-form">
-      <%= fb.fields_for :products do |f| %>
         <tr class="item">
           <td>
             <%= f.label :name,"商品名",id:"date" %>
@@ -51,16 +50,15 @@
             <%= f.text_field :stock, class: 'form-control' %>
           </td>
           <td class="text-center">
-            <%= f.label :suspended,"出品中or停止中",id:"date" %>
+            <%= f.label :suspended,"出品",id:"date" %>
             <%= f.check_box :suspended, class: 'top10 registration-checkbox' %>
           </td>
         </tr>
-      <% end %>
     </tbody>
   </table>
 
   <div class="text-center">
-    <%= fb.submit '一括登録', class: 'btn btn-primary' %>
+    <%= f.submit '編集完了', class: 'btn btn-primary' %>
   </div>
 <% end %>
 
