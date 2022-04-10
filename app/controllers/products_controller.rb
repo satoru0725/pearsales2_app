@@ -32,6 +32,15 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    product = Product.find(params[:id])
+    if product.destroy
+      redirect_to user_path(params[:user_id])
+    else
+      render :show
+    end
+  end
+
   private
 
   def move_to_index

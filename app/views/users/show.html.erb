@@ -117,6 +117,7 @@
                           <td class="text-danger">停止中</td>
                         <% end %>
                         <td><%= link_to '編集', edit_user_product_path(@user.id, product.id), class: "btn btn-success" %></td>
+                        <td><%= link_to '削除', user_product_path(@user.id, product.id), method: :delete, class: "btn btn-secondary" %></td>
                       </tr>
                     <% end %>
                     </tbody>
@@ -150,6 +151,7 @@
                           <td class="text-danger">停止中</td>
                         <% end %>
                         <td><%= link_to '編集', edit_user_product_path(@user.id, product.id), class: "btn btn-success" %></td>
+                        <td><%= link_to '削除', user_product_path(@user.id, product.id), method: :delete, class: "btn btn-secondary" %></td>
                       </tr>
                     <% end %>
                     </tbody>
@@ -170,7 +172,7 @@
 
 
 <div class="text-center">
-    <%= link_to '商品の新規出品', new_user_product_path(@user.id), class: "btn btn-primary" %>
-  </div>
+  <%= link_to '商品の新規出品', new_user_product_path(@user.id), class: "btn btn-primary" %>
+</div>
 
 <%= render "shared/footer" %>

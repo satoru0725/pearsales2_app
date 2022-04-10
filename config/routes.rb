@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   }
   root to: "products#index"
   resources :users, only: [:show, :edit, :update ] do
-    resources :products, only: [:index, :new, :create, :edit, :update]
+    resources :products, only: [:index, :new, :create, :edit, :update, :destroy]
   end
   
   resources :customers, only: [:show, :edit, :update ]
