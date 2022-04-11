@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   end
   
   resources :customers, only: [:show, :edit, :update ]
-  
+
+  get '/my_cart' => 'carts#my_cart'
+  post '/add_item' => 'carts#add_item'
+  post '/update_item' => 'carts#update_item'
+  delete '/delete_item' => 'carts#delete_item'
   
 end
