@@ -24,6 +24,6 @@ class Customer < ApplicationRecord
     validates :last_name_kana
   end
   
-  has_many :products, through: :orders
+  has_one :cart, dependent: :destroy
         
 end
