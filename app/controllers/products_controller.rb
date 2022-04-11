@@ -51,7 +51,7 @@ class ProductsController < ApplicationController
 
   def product_collection_params
     params.require(:form_product_collection)
-    .permit(products_attributes: [:name, :variety, :rank, :weight, :price, :stock, :postage, :remark, :suspended])
+    .permit(products_attributes: [:name, :variety, :rank, :weight, :price, :stock, :postage, :remark, :suspended]).merge(user_id: current_user.id)
   end
 
   def product_params
