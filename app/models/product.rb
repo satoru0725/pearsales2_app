@@ -12,6 +12,7 @@ class Product < ApplicationRecord
   validates :suspended, inclusion: { in: [true, false] }
   validates_presence_of :user
 
-  has_many :customers, through: :orders
+  has_many :carts, through: :cart_items
+  has_many :cart_items, dependent: :destroy
   belongs_to :user, inverse_of: :products
 end

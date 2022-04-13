@@ -11,10 +11,14 @@ Rails.application.routes.draw do
   }
   root to: "products#index"
   resources :users, only: [:index, :show, :edit, :update ] do
-    resources :products, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :products
   end
   
   resources :customers, only: [:show, :edit, :update ]
-  
+
+  get '/my_cart' => 'carts#my_cart'
+  post '/add_item' => 'carts#add_item'
+  post '/update_item' => 'carts#update_item'
+  delete '/delete_item' => 'carts#delete_item'
   
 end
