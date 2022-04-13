@@ -1,0 +1,18 @@
+<h1>予約フォーム</h1>
+
+<ol class="nav">
+	<li class="current">1.予約日入力</li>
+	<li>2.注文内容の確認</li>
+	<li>3.完了</li>
+</ol>
+
+<%= form_for @reserve, method: :post, url: reserves_confirm_path do |form| %>
+	<dl>
+		<dt>希望日</dt>
+		<dd><%= form.date_field :reserve_on %></dd>
+		<dt>備考</dt>
+		<dd><%= form.text_field :remark %></dd>
+	</dl>
+
+	<%= form.submit '確認画面へ' %>
+<% end %>

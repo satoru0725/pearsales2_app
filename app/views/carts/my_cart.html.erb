@@ -3,4 +3,6 @@
 <%= render partial: "carts/cart_item", collection: @cart_items, as: "cart_item"%>
 <h2><%= "合計：#{@total}円" %></h2>
 
+<%= link_to "購入予約画面に進む", reserves_new_path %>
+
 <%= render "shared/footer" %>

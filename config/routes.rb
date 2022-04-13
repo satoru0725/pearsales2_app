@@ -20,5 +20,10 @@ Rails.application.routes.draw do
   post '/add_item' => 'carts#add_item'
   post '/update_item' => 'carts#update_item'
   delete '/delete_item' => 'carts#delete_item'
+
+  get 'reserves/new'
+  post 'reserves/confirm'
+  post 'reserves/back'
+  post 'reserves/complete'
   
 end
