@@ -5,10 +5,10 @@ PEARSALES
 # URL
 
 # テスト用アカウント
-出店者用のメールアドレス:  
-出店者用のパスワード:  
-購入者用のメールアドレス：  
-購入者用のパスワード:  
+出店者用のメールアドレス:hoge@hoge   
+出店者用のパスワード:a12345  
+購入者用のメールアドレス：hoge@hoge  
+購入者用のパスワード:a12345  
 # 利用方法
 ## 商品の出品
 1.トップページのヘッダーからユーザーの新規登録を行う。  
@@ -24,139 +24,30 @@ PEARSALES
 # アプリケーションを作成した背景
 実家やその周りの地域では梨の直売が盛んで、夏の最盛期には沢山のお客様で賑わっている。売上の中でも贈答用の箱売りの梨が一番の売上になるが、お得意様などの一部の方が買っていくのみである。インターネット販売を行っているのは一部の有名店や自分のホームページを持っている人のみで、店頭で注文を受け付けている人が自分の実家を含めて多いと感じた。このような人たちが気軽に梨をインターネット販売できるようなアプリがあると便利だと感じたため、梨販売のアプリケーションの開発を行うことにした。
 # 洗い出した要件
+https://docs.google.com/spreadsheets/d/1htRLpbtVbamt9ArLHKKCKk9W1f2qoxjGRIN-ZAI5BQs/edit#gid=982722306
 # 実装した機能についての画像やGIF、およびその説明
 # 実装予定の機能
+・購入履歴の実装  
+・配送先データ入力の追加
 # データベース設計
+[![Image from Gyazo](https://i.gyazo.com/59490925d6007a929175501f4d7f7e0e.jpg)](https://gyazo.com/59490925d6007a929175501f4d7f7e0e)
 # 画面遷移図
+[![Image from Gyazo](https://i.gyazo.com/46d80ddacf9d98a272c123cae34c3fd4.png)](https://gyazo.com/46d80ddacf9d98a272c123cae34c3fd4)
 # 開発環境
+Ruby / Ruby on Rails / MySQL / GitHub / Heroku / Visual Studio Code
+
 # ローカルでの動作方法
+% git clone https://github.com/satoru0725/pearsales2_app.git  
+% cd pearsales2_app  
+% bundle install  
+% yarn install  
+% rails db:create  
+% rails db:migrate  
+% rails s
+
 # 工夫したポイント
+・商品の新規出品フォームを複数用意して、複数の商品データを一括でテーブルに保存する機能を実装した。  
+・出品した商品の品種別にタブ表示されるようにして、商品の一覧を品種別にコンパクトに表示させるようにした。
+・カート機能を実装して、個数を指定して商品を買えるようにした。
 
 
-# テーブル設計
-
-## users テーブル
-
-| Column             | Type   | Options                   |
-| ------------------ | ------ | ------------------------- |
-| email              | string | null: false, unique: true |
-| encrypted_password | string | null: false               |
-| last_name          | string | null: false               |
-| first_name         | string | null: false               |
-| last_name_kana     | string | null: false               |
-| first_name_kana    | string | null: false               |
-| shop_name          | string | null: false, unique: true |
-| phone_number       | string | null: false               |
-| fax_number         | string |                           |
-| postal_code        | string | null: false               |
-| prefecture         | string | null: false               |
-| city               | string | null: false               |
-| town               | string | null: false               |
-| extended_address   | string |                           |
-
-
-### Association
-
-- has_many :products
-
-## customers テーブル
-
-| Column             | Type   | Options                   |
-| ------------------ | ------ | ------------------------- |
-| nickname           | string | null: false, unique: true |
-| email              | string | null: false, unique: true |
-| encrypted_password | string | null: false               |
-| last_name          | string | null: false               |
-| first_name         | string | null: false               |
-| last_name_kana     | string | null: false               |
-| first_name_kana    | string | null: false               |
-| phone_number       | string | null: false               |
-| fax_number         | string |                           |
-| postal_code        | string | null: false               |
-| prefecture         | string | null: false               |
-| city               | string | null: false               |
-| town               | string | null: false               |
-| extended_address   | string |                           |
-
-
-### Association
-
-- has_many :products, through: :orders
-
-## productsテーブル
-
-| Column    | Type       | Options                       |
-|-----------|------------|-------------------------------|
-| name      | string     |null: false                    |
-| variety   | string     |null: false                    |
-| rank      | string     |null: false                    |
-| weight    | integer    |null: false                    |
-| price     | integer    |null: false                    |
-| stock     | integer    |null: false                    |
-| postage   | integer    |null: false                    |
-| remark    | text       |null: false                    |
-| suspended | boolean    |null: false, default: false    |
-| user      | references |null: false, foreign_key: true |
-
-
-### Association
-
-- belongs_to :user
-- has_many :customers, through: :orders
-
-## ordersテーブル
-
-| Column              | Type       | Options                       |
-|---------------------|------------|-------------------------------|
-| customer            | references |null: false, foreign_key: true |
-| product             | references |null: false, foreign_key: true |
-| quantity            | integer    |null: false                    |
-| desired_delivery_on | date       |null: false                    |
-
-
-
-### Association
-
-- belongs_to :customer
-- belongs_to :product
-- has_one :reciever
-- has_ine :shipments
-
-## recievers テーブル
-
-| Column             | Type       | Options                       |
-| ------------------ | ---------- | ----------------------------- |
-| email              | string     | null: false, unique: true     |
-| encrypted_password | string     | null: false                   |
-| last_name          | string     | null: false                   |
-| first_name         | string     | null: false                   |
-| last_name_kana     | string     | null: false                   |
-| first_name_kana    | string     | null: false                   |
-| phone_number       | string     | null: false                   |
-| fax_number         | string     | null: false                   |
-| postal_code        | string     | null: false                   |
-| prefecture         | string     | null: false                   |
-| city               | string     | null: false                   |
-| town               | string     | null: false                   |
-| extended_address   | string     | null: false                   |
-| order              | references |null: false, foreign_key: true |
-
-
-### Association
-
-- belongs_to :order
-
-## shipments テーブル
-
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| pick_up_on      | string     | null: false, unique: true      |
-| arrival_on      | string     | null: false                    |
-| invoice_number  | string     | null: false                    |
-| remark          | string     | null: false                    |
-| order           | references | null: false, foreign_key: true |
-
-
-### Association
-
-- belongs_to :order
