@@ -12,6 +12,8 @@ class ReservesController < ApplicationController
 	end
 
 	def confirm
+		@cart_items = current_cart.cart_items.includes([:product])
+    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
 		@reserve = Reserve.new(@attr)
 		if @reserve.invalid?
 			render :new

@@ -1,3 +1,5 @@
+<%= render "shared/header" %>
+
 <h1>予約フォーム</h1>
 
 <ol class="nav">
@@ -6,6 +8,8 @@
 	<li>3.完了</li>
 </ol>
 
+<%= render partial: "reserves/item_confirmation", collection: @cart_items, as: "cart_item"%>
+<h2><%= "合計：#{@total}円" %></h2>
 <dl>
 	<dt>希望日</dt>
 	<dd><%= @reserve.reserve_on %></dd>
@@ -24,3 +28,5 @@
 	<%= form.hidden_field :remark %>
 	<%= form.submit '送信する' %>
 <% end %>
+
+<%= render "shared/footer" %>
