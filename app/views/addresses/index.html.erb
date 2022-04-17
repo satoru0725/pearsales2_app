@@ -1,3 +1,5 @@
+<%= render "shared/header" %>
+
 <div class="py-4">
     <section id="information">
       <div class="container border">
@@ -37,6 +39,7 @@
                       <th>FAX番号</th>
                       <td><%=address.fax_number %></td>
                     </tr>
+                    <%= link_to '編集', edit_address_path(address.id), class: "btn btn-success" %>
 
                   </tbody>
                 </table>

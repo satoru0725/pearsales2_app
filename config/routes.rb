@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
   
   resources :customers, only: [:show, :edit, :update ]
-  resources :addresses, only: [:index, :new, :create]
+  resources :addresses, only: [:index, :new, :create, :edit, :update]
 
   get '/my_cart' => 'carts#my_cart'
   post '/add_item' => 'carts#add_item'
