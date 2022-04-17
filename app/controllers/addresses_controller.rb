@@ -1,4 +1,8 @@
 class AddressesController < ApplicationController
+
+  def index
+    @addresses = Address.where(customer_id: current_customer.id)
+  end
   def new
     @address = Address.new
   end

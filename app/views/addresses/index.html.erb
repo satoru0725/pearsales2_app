@@ -1,0 +1,57 @@
+<div class="py-4">
+    <section id="information">
+      <div class="container border">
+        <h3 class="mb-3">登録住所一覧</h3>
+        <p>登録されている配送先が表示されます。 </p>
+        <% @addresses.each do |address|%>
+          <div class="row">
+            <!-- 左側セクション -->
+            <div class="col-md-10 border-bottom">
+              <section id="shop">
+                <h4 class="mb-3">住所</h4>
+                <!-- 店舗情報の表 -->
+                <table class="table table-hover">
+                  <tbody>
+                    
+                    <tr>
+                      <th>名前</th>
+                      <td><%=address.last_name %>  <%=address.first_name %></td>
+                    </tr>
+                    <tr>
+                      <th>ヨミガナ</th>
+                      <td><%=address.last_name_kana %>  <%=address.first_name_kana %></td>
+                    </tr>
+                    <tr>
+                      <th>郵便番号</th>
+                      <td><%=address.postal_code %></td>
+                    </tr>
+                    <tr>
+                      <th>住所</th>
+                      <td><%=address.prefecture %> <%=address.city %><%=address.town %><%=address.extended_address %></td>
+                    </tr>
+                    <tr>
+                      <th>電話番号</th>
+                      <td><%=address.phone_number %></td>
+                    </tr>
+                    <tr>
+                      <th>FAX番号</th>
+                      <td><%=address.fax_number %></td>
+                    </tr>
+
+                  </tbody>
+                </table>
+                <!-- /店舗情報の表 -->
+              </section>
+            </div>
+            <!-- /左側セクション -->
+
+            
+          </div>
+
+          
+        <% end %>  
+      </div>
+    </section>
+  </div>
+
+<%= render "shared/footer" %>
