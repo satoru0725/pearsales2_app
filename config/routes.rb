@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
   
   resources :customers, only: [:show, :edit, :update ]
+  resources :addresses, except: [:show]
 
   get '/my_cart' => 'carts#my_cart'
   post '/add_item' => 'carts#add_item'
