@@ -40,6 +40,7 @@
                       <td><%=address.fax_number %></td>
                     </tr>
                     <%= link_to '編集', edit_address_path(address.id), class: "btn btn-success" %>
+                    <%= link_to '削除', address_path(address.id), method: :delete, class: "btn btn-danger me-2" %>
 
                   </tbody>
                 </table>

@@ -27,6 +27,15 @@ class AddressesController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    address = Address.find(params[:id])
+    if address.destroy
+      redirect_to addresses_path
+    else
+      render :index
+    end
+  end
 end
 
 private
