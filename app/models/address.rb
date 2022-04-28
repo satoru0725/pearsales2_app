@@ -20,5 +20,5 @@ class Address < ApplicationRecord
   validates :phone_number, numericality: { only_integer: true }, length: { in: 10..11 }
 
   belongs_to :customer
-  has_one :reserve
+  has_many :reserves
 end

@@ -88,8 +88,9 @@ ActiveRecord::Schema.define(version: 2022_04_13_094805) do
   end
 
   create_table "reserves", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "reserve_on"
+    t.date "reserve_on"
     t.string "remark"
+    t.integer "total_price", null: false
     t.bigint "customer_id", null: false
     t.bigint "address_id", null: false
     t.datetime "created_at", precision: 6, null: false

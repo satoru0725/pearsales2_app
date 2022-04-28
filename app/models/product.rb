@@ -15,4 +15,6 @@ class Product < ApplicationRecord
   has_many :carts, through: :cart_items
   has_many :cart_items, dependent: :destroy
   belongs_to :user, inverse_of: :products
+  has_many :reserves, through: :order_items
+  has_many :order_items
 end
