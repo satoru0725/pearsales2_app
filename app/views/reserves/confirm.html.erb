@@ -15,18 +15,25 @@
 	<dd><%= @reserve.reserve_on %></dd>
 	<dt>備考</dt>
 	<dd><%= @reserve.remark %></dd>
+	<dt>配達先</dt>
+	<dt>郵便番号</dt>
+	<dd><%= @address.postal_code %></dd>
 </dl>
 
-<%= form_for @reserve, method: :post, url: reserves_back_path do |form| %>
-	<%= form.hidden_field :reserve_on %>
-	<%= form.hidden_field :remark %>
-	<%= form.submit '入力画面に戻る' %>
+<%= form_for @reserve, method: :post, url: reserves_back_path do |f| %>
+	<%= f.hidden_field :reserve_on %>
+	<%= f.hidden_field :remark %>
+	<%= f.hidden_field :total_price %>
+	<%= f.hidden_field :address_id %>
+	<%= f.submit '入力画面に戻る' %>
 <% end %>
 
-<%= form_for @reserve, method: :post, url: reserves_complete_path do |form| %>
-	<%= form.hidden_field :reserve_on %>
-	<%= form.hidden_field :remark %>
-	<%= form.submit '送信する' %>
+<%= form_for @reserve, method: :post, url: reserves_complete_path do |f| %>
+	<%= f.hidden_field :reserve_on %>
+	<%= f.hidden_field :remark %>
+	<%= f.hidden_field :total_price %>
+	<%= f.hidden_field :address_id %>
+	<%= f.submit '送信する' %>
 <% end %>
 
 <%= render "shared/footer" %>

@@ -21,4 +21,8 @@ class Address < ApplicationRecord
 
   belongs_to :customer
   has_many :reserves
+
+  def full_address
+    "〒" + self.postal_code + "　住所:" + self.prefecture + "" + self.city + "" + self.town + "" + self.extended_address + "　名前:" + self.last_name + "" + self.first_name
+  end
 end

@@ -9,15 +9,20 @@
 	<li>3.完了</li>
 </ol>
 
-<%= form_for @reserve, method: :post, url: reserves_confirm_path do |form| %>
+<%= form_with model: @reserve, method: :post, url: reserves_confirm_path, local: true do |f| %>
+	<%= render 'shared/error_messages', model: f.object %>
 	<dl>
 		<dt>希望日</dt>
-		<dd><%= form.date_field :reserve_on %></dd>
+		<dd><%= f.date_field :reserve_on %></dd>
 		<dt>備考</dt>
-		<dd><%= form.text_field :remark %></dd>
+		<dd><%= f.text_field :remark %></dd>
+  	<%= f.label :address_id, "登録先の住所" %>
+  	<%= f.collection_select(:address_id, @addresses, :id, :full_address ) %>
+		<%= f.hidden_field :total_price, :value => @total %>
+
 	</dl>
 
-	<%= form.submit '確認画面へ' %>
+	<%= f.submit '確認画面へ' %>
 <% end %>
 
 <%= render "shared/footer" %>
