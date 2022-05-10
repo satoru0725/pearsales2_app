@@ -20,18 +20,18 @@
 	<dd><%= @address.postal_code %></dd>
 </dl>
 
-<%= form_for @reserve, method: :post, url: reserves_back_path do |f| %>
+<%= form_with model: @reserve, method: :post, url: reserves_back_path, local: true do |f| %>
 	<%= f.hidden_field :reserve_on %>
 	<%= f.hidden_field :remark %>
-	<%= f.hidden_field :total_price %>
+	<%= f.hidden_field :total_price, :value => @total %>
 	<%= f.hidden_field :address_id %>
 	<%= f.submit '入力画面に戻る' %>
 <% end %>
 
-<%= form_for @reserve, method: :post, url: reserves_complete_path do |f| %>
+<%= form_with model: @reserve, method: :post, url: reserves_complete_path, local: true do |f| %>
 	<%= f.hidden_field :reserve_on %>
 	<%= f.hidden_field :remark %>
-	<%= f.hidden_field :total_price %>
+	<%= f.hidden_field :total_price, :value => @total %>
 	<%= f.hidden_field :address_id %>
 	<%= f.submit '送信する' %>
 <% end %>

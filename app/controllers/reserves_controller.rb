@@ -16,9 +16,9 @@ class ReservesController < ApplicationController
 	end
 
 	def confirm
+		@reserve = Reserve.new(@attr)
 		@cart_items = current_cart.cart_items.includes([:product])
     @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
-		@reserve = Reserve.new(@attr)
 		@address = Address.find(params[:reserve][:address_id])
 		if @reserve.invalid?
       render :new
@@ -26,7 +26,21 @@ class ReservesController < ApplicationController
 	end
 
 	def complete
-		Reserve.create!(@attr)
+		@cart_items = current_cart.cart_items.includes([:product])
+		@reserve = Reserve.new(@attr)
+		if @reserve.save
+			@cart_items.each do |item|
+				order_item = OrderItem.new
+				order_item.quantity = item.quantity
+				order_item.price = item.product.price
+				order_item.product_id = item.product_id
+				order_item.reserve_id = @reserve.id
+				order_item.save
+			end
+		else
+			@reserve = Reserve.new(@attr)
+			render :new
+		end
 	end
 
 	private
