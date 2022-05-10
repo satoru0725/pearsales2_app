@@ -37,6 +37,7 @@ class ReservesController < ApplicationController
 				order_item.reserve_id = @reserve.id
 				order_item.save
 			end
+			@cart_items.destroy_all
 		else
 			@reserve = Reserve.new(@attr)
 			render :new
