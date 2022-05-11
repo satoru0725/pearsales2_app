@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_13_094805) do
+ActiveRecord::Schema.define(version: 2022_05_01_080558) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "customer_id", null: false
@@ -71,6 +71,17 @@ ActiveRecord::Schema.define(version: 2022_04_13_094805) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "quantity", null: false
+    t.integer "price", null: false
+    t.bigint "product_id", null: false
+    t.bigint "reserve_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+    t.index ["reserve_id"], name: "index_order_items_on_reserve_id"
+  end
+
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "variety", null: false
@@ -127,6 +138,8 @@ ActiveRecord::Schema.define(version: 2022_04_13_094805) do
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
   add_foreign_key "carts", "customers"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "order_items", "reserves", column: "reserve_id"
   add_foreign_key "products", "users"
   add_foreign_key "reserves", "addresses"
   add_foreign_key "reserves", "customers"
