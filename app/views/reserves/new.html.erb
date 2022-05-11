@@ -1,28 +1,78 @@
-<%= render "shared/header" %>
+<div class="container-fluid m-5">
+	<div class="row align-items-center">
+		<div class="col-4">
+			<a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+        <%= image_tag "logo.png" %>
+      </a>
+		</div>
+		<div class="col-8">
+			<em class="bg-success h4 p-3  border_bottom text-white"> 1. 予約情報の入力 </em>
+			<em class="h1"> ▶︎ </em>
+			<em class="h4 p-3 border-bottom"> 2. 注文内容の確認 </em>
+			<em class="h1"> ▶︎ </em>
+			<em class="h4 p-3 border-bottom"> 3. 完了 </em>
+		</div>
+	</div>
 
+	<div class="row justify-content-center">
+		<strong class="display-6 text-center">予約フォーム</strong>
+	</div>
 
-<h1>予約フォーム</h1>
+	<div class="row">
+		<%= form_with model: @reserve, method: :post, url: reserves_confirm_path, local: true do |f| %>
+			<div class="row-fluid py-3">
+				<%= render 'shared/error_messages', model: f.object %>
+			</div>
+			<div class="row px-5">
+				商品のお届け先の住所を、お客様が登録されている中からお選びください。
+			</div>
+			<div class="row p-3 mx-3 border">
+				<div class="col-8 border-end">
+					<div class="h4">
+						<%= f.label :address_id, "登録先の住所"%>
+					</div>
+					<div>
+						<%= f.collection_select(:address_id, @addresses, :id, :full_address ) %>
+					</div>
+				</div>
+				<div class="col">
+					<div>
+						新規の住所登録はこちらから
+					</div>
+					<div>
+						<%= link_to '新規住所登録', new_address_path, class: "btn btn-secondary" %>
+					</div>
+				</div>
+			</div>
 
-<ol class="nav">
-	<li class="current">1.予約日入力</li>
-	<li>2.注文内容の確認</li>
-	<li>3.完了</li>
-</ol>
+			<div class="row px-5 pt-3">
+				<div>商品のお届け先に到着する予定日を選択してください。</div>
+				<div class="text-danger">※選択された予定日が不可能な場合は、出品者から連絡がある場合がございます。</div>
+			</div>
 
-<%= form_with model: @reserve, method: :post, url: reserves_confirm_path, local: true do |f| %>
-	<%= render 'shared/error_messages', model: f.object %>
-	<dl>
-		<dt>希望日</dt>
-		<dd><%= f.date_field :reserve_on %></dd>
-		<dt>備考</dt>
-		<dd><%= f.text_field :remark %></dd>
-  	<%= f.label :address_id, "登録先の住所" %>
-  	<%= f.collection_select(:address_id, @addresses, :id, :full_address ) %>
-		<%= f.hidden_field :total_price, :value => @total %>
+			<div class="row p-3 mx-3 border">
+				<div class="h4">希望日</div>
+				<div><%= f.date_field :reserve_on %></div>
+			</div>
+			
+			<div class="row px-5 pt-3">
+				<div>気になる点、要望がありましたら備考欄に記入してください。
+			</div>
+			<div class="row p-3 border">
+				<div class="h4">備考</div>
+				<div><%= f.text_area :remark %></div>
+			</div>
+			
+			<div>
+				<%= f.hidden_field :total_price, :value => @total %>
+			</div>
 
-	</dl>
-
-	<%= f.submit '確認画面へ' %>
-<% end %>
+			<div class="p-3 m-3">
+				<div class="text-center">
+					<%= f.submit '確認画面へ' %>
+				</div>
+			</div>
+		<% end %>
+</div>
 
 <%= render "shared/footer" %>
