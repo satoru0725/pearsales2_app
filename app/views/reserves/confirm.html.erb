@@ -1,39 +1,104 @@
-<%= render "shared/header" %>
+<div class="container-fluid m-5">
+	<div class="row align-items-center">
+		<div class="col-4">
+			<a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+        <%= image_tag "logo.png" %>
+      </a>
+		</div>
+		<div class="col-8">
+			<em class="h4 p-3  border-bottom"> 1. 予約情報の入力 </em>
+			<em class="h1"> ▶︎ </em>
+			<em class="bg-success h4 p-3 border-bottom text-white"> 2. 注文内容の確認 </em>
+			<em class="h1"> ▶︎ </em>
+			<em class="h4 p-3 border-bottom"> 3. 完了 </em>
+		</div>
+	</div>
 
-<h1>予約フォーム</h1>
+	<div class="row justify-content-center">
+		<strong class="display-6 text-center">注文の確認画面</strong>
+	</div>
 
-<ol class="nav">
-	<li>1.予約日入力</li>
-	<li class="current">2.注文内容確認</li>
-	<li>3.完了</li>
-</ol>
+	<div class="col-md-4">
+		<h4>予約情報</h4>
+		<table class ="table table-hover border">
+			<tbody>
+				<tr>
+					<th class="col-3 border-end">到着希望日</th>
+					<td><%= @reserve.reserve_on %></td>
+				</tr>
+				<tr>
+					<th class="col-3 border-end">備考</th>
+					<td><%= @reserve.remark %></td>
+				</tr>
+			</tbody>
+		</table>
 
-<%= render partial: "reserves/item_confirmation", collection: @cart_items, as: "cart_item"%>
-<h2><%= "合計：#{@total}円" %></h2>
-<dl>
-	<dt>希望日</dt>
-	<dd><%= @reserve.reserve_on %></dd>
-	<dt>備考</dt>
-	<dd><%= @reserve.remark %></dd>
-	<dt>配達先</dt>
-	<dt>郵便番号</dt>
-	<dd><%= @address.postal_code %></dd>
-</dl>
+		<h4>お届け先住所</h4>
+		<table class ="table table-hover border">
+			<tbody>
+				<tr>
+					<th class="col-3 border-end">郵便番号〒</th>
+					<td><%= @address.postal_code %></td>
+				</tr>
+				<tr>
+					<th class="col-3 border-end">受取人 氏名(漢字)</th>
+					<td><%= @address.last_name %>  <%= @address.first_name %></td>
+				</tr>
+				<tr>
+					<th class="col-3 border-end">受取人 氏名(カナ)</th>
+					<td><%= @address.last_name_kana %>  <%= @address.first_name_kana %></td>
+				</tr>
+				<tr>
+					<th class="col-3 border-end">住所</th>
+					<td><%= @address.prefecture %>  <%= @address.city %>  <%= @address.town %>  <%= @address.extended_address %></td>
+				</tr>
+				<tr>
+					<th class="col-3 border-end">電話番号</th>
+					<td><%= @address.phone_number %></td>
+				</tr>
+				<tr>
+					<th class="col-3 border-end">FAX</th>
+					<td><%= @address.fax_number %></td>
+				</tr>
+			</tbody>
+		</table>
 
-<%= form_with model: @reserve, method: :post, url: reserves_back_path, local: true do |f| %>
-	<%= f.hidden_field :reserve_on %>
-	<%= f.hidden_field :remark %>
-	<%= f.hidden_field :total_price, :value => @total %>
-	<%= f.hidden_field :address_id %>
-	<%= f.submit '入力画面に戻る' %>
-<% end %>
+		<div class="row">
+			<div class="col">
+				<div class="col-3 h5">希望日</div>
+				<div><%= @reserve.reserve_on %></div>
+			</div>
+			<div class="col">
+				<dt>備考</dt>
+				<dd><%= @reserve.remark %></dd>
+			</div>
+				<dt>配達先</dt>
+				<dt>郵便番号</dt>
+				<dd><%= @address.postal_code %></dd>
+			</dl>
 
-<%= form_with model: @reserve, method: :post, url: reserves_complete_path, local: true do |f| %>
-	<%= f.hidden_field :reserve_on %>
-	<%= f.hidden_field :remark %>
-	<%= f.hidden_field :total_price, :value => @total %>
-	<%= f.hidden_field :address_id %>
-	<%= f.submit '送信する' %>
-<% end %>
+			<%= render partial: "reserves/item_confirmation", collection: @cart_items, as: "cart_item"%>
+			<h2><%= "合計：#{@total}円" %></h2>
+
+
+			<%= form_with model: @reserve, method: :post, url: reserves_back_path, local: true do |f| %>
+				<%= f.hidden_field :reserve_on %>
+				<%= f.hidden_field :remark %>
+				<%= f.hidden_field :total_price, :value => @total %>
+				<%= f.hidden_field :address_id %>
+				<%= f.submit '入力画面に戻る' %>
+			<% end %>
+
+			<%= form_with model: @reserve, method: :post, url: reserves_complete_path, local: true do |f| %>
+				<%= f.hidden_field :reserve_on %>
+				<%= f.hidden_field :remark %>
+				<%= f.hidden_field :total_price, :value => @total %>
+				<%= f.hidden_field :address_id %>
+				<%= f.submit '送信する' %>
+			<% end %>
+
+		</div>
+	</div>			
+</div>
 
 <%= render "shared/footer" %>
