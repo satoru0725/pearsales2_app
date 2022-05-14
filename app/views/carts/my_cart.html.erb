@@ -25,32 +25,12 @@
 	</div>
 	<div class="row">
 		<div class="col text-end p-3">
-			<%= button_to "出店一覧へ", users_path, method: :get %>
+			<%= button_to "出店一覧へ", users_path, method: :get, class: "btn btn-light btn-outline-dark" %>
 		</div>
 		<div class="col text-start p-3">
-			<%= button_to "購入画面へ", reserves_new_path, method: :get %>
+			<%= button_to "購入画面へ", reserves_new_path, method: :get, class: "btn btn-light btn-outline-warning" %>
 		</div>
 	</div>
 </div>
 
 <%= render "shared/footer" %>
-<!--<div class=container>
-  <div class="col-md-8">
-		<h4>商品</h4>
-		<div class="row">
-				<div class="col">店名</div>
-				<div class="col">品名</div>
-				<div class="col">品種</div>
-				<div class="col">玉数(ランク)</div>
-				<div class="col">重量(kg)</div>
-				<div class="col">送料(円)</div>
-				<div class="col">単価(円)</div>
-				<div class="col">数量(個)</div>
-			</div>
-			<%= render partial: "reserves/item_confirmation", collection: @cart_items, as: "cart_item"%>
-		</div>
-		<h2><%= "合計：#{@total}円" %></h2>
-	</div>
-  <%= link_to "購入予約画面に進む", reserves_new_path %>
-</div>
--->
