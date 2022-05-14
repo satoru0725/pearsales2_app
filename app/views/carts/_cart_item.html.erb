@@ -1,15 +1,52 @@
-<li class="list-none">
-    <%= "品名: #{cart_item.product.name}" %>
-    <%= "品種: #{cart_item.product.variety}" %>
-    <%= "玉数: #{cart_item.product.rank}" %>
-    <%= "重量: #{cart_item.product.weight}" %>
-    <%= "送料: #{cart_item.product.postage}" %>
-    <%= "単価:#{cart_item.product.price}円" %>
-    <%= form_with(url: update_item_url, method: :post,local: true) do |f| %>
-    <%= f.hidden_field :product_id, value: cart_item.product.id %>
-    <%= f.number_field :quantity ,value: cart_item.quantity%>
-    <%= f.submit "更新", class: "" %>
-    <% end %>
-    <%= button_to "削除", delete_item_path(product_id: cart_item.product.id), method: :delete,
+<tbody>
+  <tr>
+    <td><%= "#{cart_item.product.user.shop_name}" %></td>
+    <td><%= "#{cart_item.product.name}" %></td>
+    <td><%= "#{cart_item.product.variety}" %></td>
+    <td><%= "#{cart_item.product.rank}" %></td>
+    <td><%= "#{cart_item.product.weight}" %></td>
+    <td><%= "#{cart_item.product.postage}" %></td>
+    <td><%= "#{cart_item.product.price}" %></td>
+    <td>
+      <div class="update">
+        <%= form_with(url: update_item_url, method: :post,local: true) do |f| %>
+          <%= f.hidden_field :product_id, value: cart_item.product.id %>
+          <%= f.number_field :quantity ,value: cart_item.quantity %>
+          <%= f.submit "更新", class: "" %>
+        <% end %>
+        <%= button_to "削除", delete_item_path(product_id: cart_item.product.id), method: :delete, data: { confirm: "商品を削除しますか？" } %>
+      </div>
+    </td>
+  </tr>
+</tbody>
+
+<!--<li class="list-none">
+    <%#= "品名: #{cart_item.product.name}" %>
+    <%#= "品種: #{cart_item.product.variety}" %>
+    <%#= "玉数: #{cart_item.product.rank}" %>
+    <%#= "重量: #{cart_item.product.weight}" %>
+    <%#= "送料: #{cart_item.product.postage}" %>
+    <%#= "単価:#{cart_item.product.price}円" %>
+    <%#= form_with(url: update_item_url, method: :post,local: true) do |f| %>
+    <%#= f.hidden_field :product_id, value: cart_item.product.id %>
+    <%#= f.number_field :quantity ,value: cart_item.quantity%>
+    <%#= f.submit "更新", class: "" %>
+    <%# end %>
+    <%#= button_to "削除", delete_item_path(product_id: cart_item.product.id), method: :delete,
                                        data: { confirm: "商品を削除しますか？" } %>
 </li>
+    <div class="row">
+    <div class="col"><%= "店名: #{cart_item.product.user.shop_name}" %></div>
+    <div class="col"><%= "品名: #{cart_item.product.name}" %></div>
+    <div class="col"><%= "玉数: #{cart_item.product.rank}" %></div>
+    <div class="col"><%= "重量: #{cart_item.product.weight}" %></div>
+    <div class="col"><%= "送料: #{cart_item.product.postage}" %></div>
+    <div class="col"><%= "単価: #{cart_item.product.name}" %></div>
+    <div class="col">
+      <%= form_with(url: update_item_url, method: :post,local: true) do |f| %>
+        <%= f.hidden_field :product_id, value: cart_item.product.id %>
+        <%= f.number_field :quantity ,value: cart_item.quantity%>
+        <%= f.submit "更新", class: "" %>
+      <% end %>
+    </div>
+</div>-->

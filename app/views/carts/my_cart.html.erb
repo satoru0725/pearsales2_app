@@ -1,8 +1,56 @@
-<%= render "shared/header" %>  
-<h2>カート内アイテム</h2>
-<%= render partial: "carts/cart_item", collection: @cart_items, as: "cart_item"%>
-<h2><%= "合計：#{@total}円" %></h2>
-
-<%= link_to "購入予約画面に進む", reserves_new_path %>
+<%= render "shared/header" %>
+<div class=container>
+	<div class="row">
+  	<div class="col">
+			<h4>商品一覧</h4>
+			<h6>数量を変更する場合は、フォームの数字を変更後に更新ボタンを押してください。</h6>
+			<h6>商品を削除する場合は、削除ボタンを押してください。</h6>
+			<table class="table table-hover table-bordered w-auto">
+				<thead>
+					<tr>
+						<th>店名</th>
+						<th>品名</th>
+						<th>品種</th>
+						<th>玉数(ランク)</th>
+						<th>重量(kg)</th>
+						<th>送料(円)</th>
+						<th>単価(円)</th>
+						<th>数量(個)</th>
+					</tr>
+				</thead>
+				<%= render partial: "carts/cart_item", collection: @cart_items, as: "cart_item"%>
+			</table>
+			<h2><%= "合計：#{@total}円" %></h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col text-end p-3">
+			<%= button_to "出店一覧へ", users_path, method: :get %>
+		</div>
+		<div class="col text-start p-3">
+			<%= button_to "購入画面へ", reserves_new_path, method: :get %>
+		</div>
+	</div>
+</div>
 
 <%= render "shared/footer" %>
+<!--<div class=container>
+  <div class="col-md-8">
+		<h4>商品</h4>
+		<div class="row">
+				<div class="col">店名</div>
+				<div class="col">品名</div>
+				<div class="col">品種</div>
+				<div class="col">玉数(ランク)</div>
+				<div class="col">重量(kg)</div>
+				<div class="col">送料(円)</div>
+				<div class="col">単価(円)</div>
+				<div class="col">数量(個)</div>
+			</div>
+			<%= render partial: "reserves/item_confirmation", collection: @cart_items, as: "cart_item"%>
+		</div>
+		<h2><%= "合計：#{@total}円" %></h2>
+	</div>
+  <%= link_to "購入予約画面に進む", reserves_new_path %>
+</div>
+-->
