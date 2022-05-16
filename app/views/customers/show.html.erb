@@ -6,59 +6,123 @@
         <h3 class="mb-3">マイページ</h3>
         <p>ここにはご利用者様の個人情報が表示されます。 </p>
         <div class="row">
-          <!-- 左側セクション -->
-          <div class="col-md-6">
-            <section id="shop">
-              <h4 class="mb-3">お客さま情報</h4>
-              <!-- カスタマー情報表 -->
-              <table class="table table-hover">
-                <tbody>
+          <div class="col-6">
+            <h4 class="mb-3">お客さま情報</h4>
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th>ニックネーム</th>
+                  <td><%= current_customer.nickname%></td>
+                </tr>
+                <tr>
+                  <th>郵便番号</th>
+                  <td>〒<%=current_customer.postal_code %></td>
+                </tr>
+                <tr>
+                  <th>住所</th>
+                  <td><%=current_customer.prefecture%>  <%=current_customer.city %>  <%=current_customer.town %>  <%= current_customer.extended_address %></td>
+                </tr>
+                <tr>
+                  <th>住所</th>
+                  <td>〒<%=current_customer.postal_code %></td>
+                </tr>
+                <tr>
+                  <th>TEL</th>
+                  <td><%= current_customer.phone_number %></td>
+                </tr>
+                <%unless current_customer.fax_number == "" %>
                   <tr>
-                    <th>ニックネーム</th>
-                    <td><%= current_customer.nickname%></td>
+                    <th>FAX</th>
+                    <td><%= current_customer.fax_number %></td>
                   </tr>
-                  <tr>
-                    <th>郵便番号</th>
-                    <td>〒<%=current_customer.postal_code %></td>
-                  </tr>
-                  <tr>
-                    <th>住所</th>
-                    <td><%=current_customer.prefecture%>  <%=current_customer.city %>  <%=current_customer.town %>  <%= current_customer.extended_address %></td>
-                  </tr>
-                  <tr>
-                    <th>住所</th>
-                    <td>〒<%=current_customer.postal_code %></td>
-                  </tr>
-                  <tr>
-                    <th>TEL</th>
-                    <td><%= current_customer.phone_number %></td>
-                  </tr>
-                  <%unless current_customer.fax_number == "" %>
-                    <tr>
-                      <th>FAX</th>
-                      <td><%= current_customer.fax_number %></td>
-                    </tr>
-                  <% end %>
-                  <tr>
-                    <th>メールアドレス</th>
-                    <td><%= current_customer.email %></td>
-                  </tr>
-                  <tr>
-                    <th>氏名(カナ)</th>
-                    <td><%= current_customer.last_name_kana %><%= current_customer.first_name_kana %></td>
-                  </tr>
-                  <tr>
-                    <th>氏名</th>
-                    <td><%= current_customer.last_name %>  <%= current_customer.first_name %></td>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- /カスタマー情報表 -->
-            </section>
+                <% end %>
+                <tr>
+                  <th>メールアドレス</th>
+                  <td><%= current_customer.email %></td>
+                </tr>
+                <tr>
+                  <th>氏名(カナ)</th>
+                  <td><%= current_customer.last_name_kana %><%= current_customer.first_name_kana %></td>
+                </tr>
+                <tr>
+                  <th>氏名</th>
+                  <td><%= current_customer.last_name %>  <%= current_customer.first_name %></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <!-- /左側セクション -->
-          
         </div>
+          
+        <div class="row">
+          <div class="col-8">
+            <h4>注文履歴</h4>
+            <% @reserves.each do |reserve|%>
+            <div class="row p-2 border border-secondary rounded-top bg-secondary bg-opacity-25">
+              <div class="col-sm-2">
+                <div class="row">
+                  <h6>到着予定日</h6>
+                </div>
+                <div class="row">
+                  <%= reserve.reserve_on %>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="row">
+                  <h6>合計金額</h6>
+                </div>
+                <div class="row">
+                  <%= reserve.total_price%> 円
+                </div>
+              </div>
+              <div class="col text-start">
+                <div class="row">
+                  <h6>お届け先</h6>
+                </div>
+                <div class="row">
+                  <%= reserve.address.last_name%>  <%= reserve.address.first_name%>
+                  〒  <%= reserve.address.postal_code%>
+                </div>
+                <div class="row">
+                  <%= reserve.address.prefecture%>  <%=reserve.address.city%> <%= reserve.address.town%>  <%=reserve.address.extended_address%>
+                </div>
+              </div>
+            </div>
+            <div class="row px-5 border border-secondary">
+              <h4>商品</h4>
+			        <table class="table table-hover table-bordered w-auto">
+			        	<thead>
+			        		<tr>
+			        			<th>店名</th>
+			        			<th>品名</th>
+			        			<th>品種</th>
+			        			<th>玉数(ランク)</th>
+			        			<th>重量(kg)</th>
+			        			<th>送料(円)</th>
+			        			<th>単価(円)</th>
+			        			<th>数量(個)</th>
+			        		</tr>
+			        	</thead>
+                <tbody>
+                  <% OrderItem.where(reserve_id: reserve.id).each do |order_item|%>
+                  <tr>
+                    <td><%= order_item.shop_name%></td>
+                    <td><%= order_item.name%></td>
+                    <td><%= order_item.variety%></td>
+                    <td><%= order_item.rank%></td>
+                    <td><%= order_item.weight%></td>
+                    <td><%= order_item.postage%></td>
+                    <td><%= order_item.price%></td>
+                    <td><%= order_item.quantity%></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+			        </table>
+            </div>
+            <% end %>
+          </div>
+        </div>
+          
+        
       </div>
     </section>
   </div>

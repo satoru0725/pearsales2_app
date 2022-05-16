@@ -72,13 +72,17 @@ ActiveRecord::Schema.define(version: 2022_05_01_080558) do
   end
 
   create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "quantity", null: false
+    t.string "shop_name", null: false
+    t.string "name", null: false
+    t.string "variety", null: false
+    t.string "rank", null: false
+    t.integer "weight", null: false
     t.integer "price", null: false
-    t.bigint "product_id", null: false
+    t.integer "quantity", null: false
+    t.integer "postage", null: false
     t.bigint "reserve_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_order_items_on_product_id"
     t.index ["reserve_id"], name: "index_order_items_on_reserve_id"
   end
 
@@ -138,7 +142,6 @@ ActiveRecord::Schema.define(version: 2022_05_01_080558) do
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
   add_foreign_key "carts", "customers"
-  add_foreign_key "order_items", "products"
   add_foreign_key "order_items", "reserves", column: "reserve_id"
   add_foreign_key "products", "users"
   add_foreign_key "reserves", "addresses"

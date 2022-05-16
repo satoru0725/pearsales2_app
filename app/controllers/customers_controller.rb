@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   def show
+    @reserves = Reserve.where(customer_id: current_customer.id).order(reserve_on: :desc)
   end
   def edit
     @customer = Customer.find(params[:id])

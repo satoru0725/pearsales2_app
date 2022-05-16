@@ -31,9 +31,14 @@ class ReservesController < ApplicationController
 		if @reserve.save
 			@cart_items.each do |item|
 				order_item = OrderItem.new
+				order_item.shop_name = item.product.user.shop_name
+				order_item.name = item.product.name
+				order_item.variety = item.product.variety
+				order_item.rank = item.product.rank
+				order_item.weight = item.product.weight
 				order_item.quantity = item.quantity
 				order_item.price = item.product.price
-				order_item.product_id = item.product_id
+				order_item.postage = item.product.postage
 				order_item.reserve_id = @reserve.id
 				order_item.save
 			end
