@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div class="px-3 py-2 bg-dark border-bottom mb-3">
+    <div class="nav_bar px-3 py-2 border-bottom mb-3 bg-warning" style="--bs-bg-opacity: .4;">
       <div class="container d-flex flex-wrap justify-content-center">
         <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
@@ -55,36 +55,40 @@
 
         <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li class="nav-item active">
-              <a href="#" class="nav-link text-white">HOME</a>
+              <a href="/" class="nav-link text-black">HOME</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link text-white">このサイトについて</a>
+              <a href="#" class="nav-link text-black">このサイトについて</a>
             </li>
             <li class="nav-item">
-              <%=link_to "出店一覧", users_path, class:"nav-link text-white"%>
+              <%=link_to "出店一覧", users_path, class:"nav-link text-black"%>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link text-white">アクセス</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-white">お問合せ</a>
+              <a href="#" class="nav-link text-black">お問合せ</a>
             </li>
           </ul>
 
         <div class="text-end">
-            <% if user_signed_in? %>
-              <%= link_to current_user.shop_name, user_path(current_user), class: "btn btn-dark text-white me-2" %>
-            <% elsif customer_signed_in? %>
-              <%= link_to 'マイカート', my_cart_path, class: "btn btn-success" %>
-              <%= link_to '個人情報編集', edit_customer_path(current_customer), class: "btn btn-primary" %>
-              <%= link_to '配送先住所登録', new_address_path, class: "btn btn-primary" %>
-              <%= link_to '配送先一覧', addresses_path, class: "btn btn-primary" %>
-              <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "btn btn-danger me-2" %>
-              <%= link_to current_customer.nickname, customer_path(current_customer), class: "btn btn-dark text-white me-2" %>
-            <% else %>
-              <%= link_to '新規登録', new_customer_registration_path, class: "btn btn-primary" %>
-              <%= link_to 'ログイン', new_customer_session_path, class: "btn btn-light text-dark me-2" %>
-            <% end %>
+          <% if user_signed_in? %>
+            <%= link_to current_user.shop_name, user_path(current_user), class: "btn btn-dark text-white me-2" %>
+          <% elsif customer_signed_in? %>
+            <%= link_to 'マイカート', my_cart_path, class: "btn btn-success" %>
+            <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "btn btn-danger me-2" %>
+            <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle text-dark" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopus="true" aria-expanded="false"><%= current_customer.nickname %></a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <%= link_to 'マイページ', customer_path(current_customer), class: 'dropdown-item' %>
+                    <%= link_to 'マイページ編集', edit_customer_path(current_customer), class: 'dropdown-item' %>
+                    <%= link_to '新規住所登録', new_address_path, class: 'dropdown-item' %>
+                    <%= link_to '配送先一覧', addresses_path, class: 'dropdown-item' %>
+                  </div>
+              </li>
+            </ul>
+          <% else %>
+            <%= link_to '新規登録', new_customer_registration_path, class: "btn btn-primary" %>
+            <%= link_to 'ログイン', new_customer_session_path, class: "btn btn-light text-dark me-2" %>
+          <% end %>
         </div>
       </div>
     </div>
