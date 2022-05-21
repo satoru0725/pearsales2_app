@@ -1,14 +1,30 @@
-<%= render "shared/header" %>
+<div class="container-fluid m-5">
+	<div class="row align-items-center">
+		<div class="col-md-4">
+			<a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+        <%= image_tag "logo.png" %>
+      </a>
+		</div>
 
+		<div class="col-md-8">
+			<em class="h4 p-2  border-bottom"> 1. 予約情報の入力 </em>
+			<em class="h1"> ▶︎ </em>
+			<em class="h4 p-2 border-bottom"> 2. 注文内容の確認 </em>
+			<em class="h1"> ▶︎ </em>
+			<em class="bg-success h4 p-2 border-bottom text-white"> 3. 完了 </em>
+		</div>
+	</div>
 
-<h1>予約フォーム</h1>
-
-<ol class="nav">
-	<li>1.予約日入力</li>
-	<li>2.注文内容確認</li>
-	<li class="current">3.完了</li>
-</ol>
-
-<p>ご予約ありがとうございました。</p>
-
+	<div class="row justify-content-center">
+		<strong class="display-6 text-center">ご予約ありがとうございました</strong>
+	</div>
+	<div class="row p-3 m-3">
+		<div class="col text-end">
+			<%= link_to 'ホームへ戻る', root_path, class: "btn btn-success" %>
+		</div>
+		<div class="col text-start">
+			<%= link_to '購入履歴へ', customer_path(current_customer), class: "btn btn-secondary" %>
+		</div>
+	</div>
+</div>
 <%= render "shared/footer" %>

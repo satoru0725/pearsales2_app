@@ -1,16 +1,16 @@
 <div class="container-fluid m-5">
 	<div class="row align-items-center">
-		<div class="col-4">
+		<div class="col-md-4">
 			<a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
         <%= image_tag "logo.png" %>
       </a>
 		</div>
-		<div class="col-8">
-			<em class="h4 p-3  border-bottom"> 1. 予約情報の入力 </em>
+		<div class="col-md-8">
+			<em class="h4 p-2  border-bottom"> 1. 予約情報の入力 </em>
 			<em class="h1"> ▶︎ </em>
-			<em class="bg-success h4 p-3 border-bottom text-white"> 2. 注文内容の確認 </em>
+			<em class="bg-success h4 p-2 border-bottom text-white"> 2. 注文内容の確認 </em>
 			<em class="h1"> ▶︎ </em>
-			<em class="h4 p-3 border-bottom"> 3. 完了 </em>
+			<em class="h4 p-2 border-bottom"> 3. 完了 </em>
 		</div>
 	</div>
 
@@ -18,69 +18,77 @@
 		<strong class="display-6 text-center">注文の確認画面</strong>
 	</div>
 
-	<div class="col-md-4">
-		<h4>予約情報</h4>
-		<table class ="table table-hover border">
-			<tbody>
-				<tr>
-					<th class="col-3 border-end">到着希望日</th>
-					<td><%= @reserve.reserve_on %></td>
-				</tr>
-				<tr>
-					<th class="col-3 border-end">備考</th>
-					<td><%= @reserve.remark %></td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="row">
+		<div class="col-md-4">
+			<h4>予約情報</h4>
+			<table class ="table table-hover table-bordered">
+				<tbody>
+					<tr>
+						<th class="col-3 border-end">到着希望日</th>
+						<td><%= @reserve.reserve_on %></td>
+					</tr>
+					<tr>
+						<th class="col-3 border-end">備考</th>
+						<td><%= @reserve.remark %></td>
+					</tr>
+				</tbody>
+			</table>
 
-		<h4>お届け先住所</h4>
-		<table class ="table table-hover border">
-			<tbody>
-				<tr>
-					<th class="col-3 border-end">郵便番号〒</th>
-					<td><%= @address.postal_code %></td>
-				</tr>
-				<tr>
-					<th class="col-3 border-end">受取人 氏名(漢字)</th>
-					<td><%= @address.last_name %>  <%= @address.first_name %></td>
-				</tr>
-				<tr>
-					<th class="col-3 border-end">受取人 氏名(カナ)</th>
-					<td><%= @address.last_name_kana %>  <%= @address.first_name_kana %></td>
-				</tr>
-				<tr>
-					<th class="col-3 border-end">住所</th>
-					<td><%= @address.prefecture %>  <%= @address.city %>  <%= @address.town %>  <%= @address.extended_address %></td>
-				</tr>
-				<tr>
-					<th class="col-3 border-end">電話番号</th>
-					<td><%= @address.phone_number %></td>
-				</tr>
-				<tr>
-					<th class="col-3 border-end">FAX</th>
-					<td><%= @address.fax_number %></td>
-				</tr>
-			</tbody>
-		</table>
+			<h4>お届け先住所</h4>
+			<table class ="table table-hover table-bordered">
+				<tbody>
+					<tr>
+						<th class="col-3 border-end">郵便番号〒</th>
+						<td><%= @address.postal_code %></td>
+					</tr>
+					<tr>
+						<th class="col-3 border-end">受取人 氏名(漢字)</th>
+						<td><%= @address.last_name %>  <%= @address.first_name %></td>
+					</tr>
+					<tr>
+						<th class="col-3 border-end">受取人 氏名(カナ)</th>
+						<td><%= @address.last_name_kana %>  <%= @address.first_name_kana %></td>
+					</tr>
+					<tr>
+						<th class="col-3 border-end">住所</th>
+						<td><%= @address.prefecture %>  <%= @address.city %>  <%= @address.town %>  <%= @address.extended_address %></td>
+					</tr>
+					<tr>
+						<th class="col-3 border-end">電話番号</th>
+						<td><%= @address.phone_number %></td>
+					</tr>
+					<tr>
+						<th class="col-3 border-end">FAX</th>
+						<td><%= @address.fax_number %></td>
+					</tr>
+				</tbody>
+			</table>
 
-		<div class="row">
-			<div class="col">
-				<div class="col-3 h5">希望日</div>
-				<div><%= @reserve.reserve_on %></div>
-			</div>
-			<div class="col">
-				<dt>備考</dt>
-				<dd><%= @reserve.remark %></dd>
-			</div>
-				<dt>配達先</dt>
-				<dt>郵便番号</dt>
-				<dd><%= @address.postal_code %></dd>
-			</dl>
-
-			<%= render partial: "reserves/item_confirmation", collection: @cart_items, as: "cart_item"%>
+			
+		</div>
+		<div class="col-md-7">
+			<h4>商品</h4>
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>店名</th>
+						<th>品名</th>
+						<th>品種</th>
+						<th>玉数(ランク)</th>
+						<th>重量(kg)</th>
+						<th>送料(円)</th>
+						<th>単価(円)</th>
+						<th>数量(個)</th>
+					</tr>
+				</thead>
+				<%= render partial: "reserves/item_confirmation", collection: @cart_items, as: "cart_item"%>
+			</table>
 			<h2><%= "合計：#{@total}円" %></h2>
-
-
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col text-end p-2">
 			<%= form_with model: @reserve, method: :post, url: reserves_back_path, local: true do |f| %>
 				<%= f.hidden_field :reserve_on %>
 				<%= f.hidden_field :remark %>
@@ -88,7 +96,8 @@
 				<%= f.hidden_field :address_id %>
 				<%= f.submit '入力画面に戻る' %>
 			<% end %>
-
+		</div>
+		<div class="col text-start p-2">
 			<%= form_with model: @reserve, method: :post, url: reserves_complete_path, local: true do |f| %>
 				<%= f.hidden_field :reserve_on %>
 				<%= f.hidden_field :remark %>
@@ -96,9 +105,8 @@
 				<%= f.hidden_field :address_id %>
 				<%= f.submit '送信する' %>
 			<% end %>
-
 		</div>
-	</div>			
+	</div>
 </div>
 
 <%= render "shared/footer" %>

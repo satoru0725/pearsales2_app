@@ -1,10 +1,12 @@
-<li class="list-none">
-    <%= "品名: #{cart_item.product.name}" %>
-    <%= "品種: #{cart_item.product.variety}" %>
-    <%= "玉数: #{cart_item.product.rank}" %>
-    <%= "重量: #{cart_item.product.weight}" %>
-    <%= "送料: #{cart_item.product.postage}" %>
-    <%= "単価:#{cart_item.product.price}円" %>
-    <%= "数量:#{cart_item.quantity}" %>
-    
-</li>
+<tbody>
+  <tr>
+    <td><%= "#{cart_item.product.user.shop_name}" %></td>
+    <td><%= "#{cart_item.product.name}" %></td>
+    <td><%= "#{cart_item.product.variety}" %></td>
+    <td><%= "#{cart_item.product.rank}" %></td>
+    <td><%= "#{cart_item.product.weight}" %></td>
+    <td><%= "#{cart_item.product.postage}" %></td>
+    <td><%= "#{cart_item.product.price}" %></td>
+    <td><%= "#{cart_item.quantity}" %></td>
+  </tr>
+<tbody>
