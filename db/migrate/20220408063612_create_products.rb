@@ -7,7 +7,7 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.integer    :weight,    null: false
       t.integer    :price,     null: false
       t.integer    :stock,     null: false
-      t.integer    :postage,  null: false
+      t.integer    :postage,   null: false
       t.text       :remark    
       t.boolean    :suspended, null: false, default: false
       t.references :user,      null: false, foreign_key: true

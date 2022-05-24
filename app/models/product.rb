@@ -5,8 +5,8 @@ class Product < ApplicationRecord
     validates :variety
     validates :rank
     validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 0 }
-    validates :stock
-    validates :postage
+    validates :stock, numericality: {only_integer: true, greater_than_or_equal_to: 1 }
+    validates :postage, numericality: {only_integer: true, greater_than_or_equal_to: 0 }
   end
 
   validates :suspended, inclusion: { in: [true, false] }

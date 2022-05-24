@@ -3,17 +3,20 @@
 <div class="container-fluid">
   <%= form_with model: @form, url: user_products_path, method: :post, local: true do |fb| %>
   <div class="row">
+    <p class="h5 text-danger">最大５つまで同時に登録できます。<br>コメント以外を入力した行の商品だけ登録されます。(入力に不備のある商品は登録されませんのでご注意ください)</p>
+  </div>
+  <div class="row">
     <div class="col">
       <table class="table border_bottom">
         <thead>
           <tr>
-            <th>商品名</th>
+            <th>商品名<span></span></th>
             <th>品種</th>
             <th>ランク（玉数）</th>
             <th>商品の重量(kg)</th>
             <th>送料</th>
             <th>値段</th>
-            <th>コメント</th>
+            <th>コメント<span class="badge bg-secondary text-light">任意</span></th>
             <th>在庫</th>
             <th>出品の可否</th>
           </tr>
