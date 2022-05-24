@@ -26,7 +26,7 @@ class Customer < ApplicationRecord
     validates :last_name_kana
   end
 
-  validates :fax_number, numericality: { only_integer: true }, length: { in: 10..11 }, if: Proc.new { |user| user.fax_number.present?}
+  validates :fax_number, numericality: { only_integer: true }, length: { in: 10..11 }, if: Proc.new { |customer| customer.fax_number.present?}
   
   has_one :cart, dependent: :destroy
   has_many :addresses, dependent: :destroy

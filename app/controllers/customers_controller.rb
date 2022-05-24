@@ -1,4 +1,6 @@
 class CustomersController < ApplicationController
+
+  before_action :authenticate_customer!, only: [:show, :edit, :update]
   def show
     @reserves = Reserve.where(customer_id: current_customer.id).order(reserve_on: :desc)
   end
