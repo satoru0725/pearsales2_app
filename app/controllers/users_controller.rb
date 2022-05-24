@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :authenticate_user!, only: [:edit, :update]
+
   def index
     @users = User.all
     @products = Product.all
@@ -10,7 +12,7 @@ class UsersController < ApplicationController
     @products = Product.where(user_id: params[:id])
     @products_variety = Product.where(user_id: params[:id]).select(:variety).distinct
     @products_count = Product.where(user_id: params[:id]).distinct.pluck(:variety)
-    @order_items = OrderItem.where(shop_name: current_user.shop_name)
+    @order_items = OrderItem.where(shop_name: params[:shop_name])
   end
   def edit
     @user = User.find(params[:id])

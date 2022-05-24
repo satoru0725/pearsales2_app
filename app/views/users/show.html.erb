@@ -116,9 +116,13 @@
                         <% else %>
                           <td class="text-danger">停止中</td>
                         <% end %>
-                        <td><%= link_to '詳細', user_product_path(@user.id, product.id), class: "btn btn-success" %></td>
-                        <td><%= link_to '編集', edit_user_product_path(@user.id, product.id), class: "btn btn-success" %></td>
-                        <td><%= link_to '削除', user_product_path(@user.id, product.id), method: :delete, class: "btn btn-secondary" %></td>
+                        <% if user_signed_in? %>
+                          <td><%= link_to '詳細', user_product_path(@user.id, product.id), class: "btn btn-success" %></td>
+                          <td><%= link_to '編集', edit_user_product_path(@user.id, product.id), class: "btn btn-primary" %></td>
+                          <td><%= link_to '削除', user_product_path(@user.id, product.id), method: :delete, class: "btn btn-secondary" %></td>
+                        <% elsif product.suspended == true %>
+                          <td><%= link_to '詳細', user_product_path(@user.id, product.id), class: "btn btn-success" %></td>
+                        <% end %>
                       </tr>
                     <% end %>
                     </tbody>
@@ -151,9 +155,14 @@
                         <% else %>
                           <td class="text-danger">停止中</td>
                         <% end %>
-                        <td><%= link_to '詳細', user_product_path(@user.id, product.id), class: "btn btn-success" %></td>
-                        <td><%= link_to '編集', edit_user_product_path(@user.id, product.id), class: "btn btn-success" %></td>
-                        <td><%= link_to '削除', user_product_path(@user.id, product.id), method: :delete, class: "btn btn-secondary" %></td>
+                        
+                        <% if user_signed_in? %>
+                          <td><%= link_to '詳細', user_product_path(@user.id, product.id), class: "btn btn-success" %></td>
+                          <td><%= link_to '編集', edit_user_product_path(@user.id, product.id), class: "btn btn-primary" %></td>
+                          <td><%= link_to '削除', user_product_path(@user.id, product.id), method: :delete, class: "btn btn-secondary" %></td>
+                        <% elsif product.suspended == true %>
+                          <td><%= link_to '詳細', user_product_path(@user.id, product.id), class: "btn btn-success" %></td>
+                        <% end %>
                       </tr>
                     <% end %>
                     </tbody>
@@ -173,72 +182,76 @@
 
 
 
-<div class="text-center">
+<div class="text-center py-2">
+<% if user_signed_in? %>
   <%= link_to '商品の新規出品', new_user_product_path(@user.id), class: "btn btn-primary" %>
+<% end %>
 </div>
 
-<div class="p-5 border">
-  <div class="row">
-          <div class="col-8">
-            <h4>販売履歴</h4>
-            <%last_reserve_id = nil %>
-            <% @order_items.each do |order_item|%>
-              <%if order_item.reserve.id != last_reserve_id%>
-                <div class="row p-2 border border-secondary rounded-top bg-secondary bg-opacity-25">
-                  <div class="col-sm-2">
-                    <div class="row">
-                      <h6>到着予定日</h6>
-                    </div>
-                    <div class="row">
-                      <%= order_item.reserve.reserve_on %>
-                    </div>
-                  </div>
-                  <div class="col text-start">
-                    <div class="row">
-                      <h6>お届け先</h6>
-                    </div>
-                    <div class="row">
-                      <%= order_item.reserve.address.last_name%>  <%= order_item.reserve.address.first_name%>
-                      〒  <%= order_item.reserve.address.postal_code%>
-                    </div>
-                    <div class="row">
-                      <%= order_item.reserve.address.prefecture%>  <%=order_item.reserve.address.city%> <%= order_item.reserve.address.town%>  <%=order_item.reserve.address.extended_address%>
-                    </div>
-                  </div>
+<%if user_signed_in? %>
+  <div class="p-5 border">
+    <div class="row">
+      <div class="col-8">
+        <h4>販売履歴</h4>
+        <%last_reserve_id = nil %>
+        <% @order_items.each do |order_item|%>
+          <%if order_item.reserve.id != last_reserve_id%>
+            <div class="row p-2 border border-secondary rounded-top bg-secondary bg-opacity-25">
+              <div class="col-sm-2">
+                <div class="row">
+                  <h6>到着予定日</h6>
                 </div>
-                <%last_reserve_id = order_item.reserve.id%>
-              <%end%>
-                
-                <div class="row px-5 border border-secondary">
-			            <table class="table table-hover table-bordered w-auto">
-			            	<thead>
-			            		<tr>
-			            			<th>品名</th>
-			            			<th>品種</th>
-			            			<th>玉数(ランク)</th>
-			            			<th>重量(kg)</th>
-			            			<th>送料(円)</th>
-			            			<th>単価(円)</th>
-			            			<th>数量(個)</th>
-			            		</tr>
-			            	</thead>
-                  
-                    <tbody>
-                      <tr>
-                        <td><%= order_item.name%></td>
-                        <td><%= order_item.variety%></td>
-                        <td><%= order_item.rank%></td>
-                        <td><%= order_item.weight%></td>
-                        <td><%= order_item.postage%></td>
-                        <td><%= order_item.price%></td>
-                        <td><%= order_item.quantity%></td>
-                      </tr>
-                    </tbody>
-			            </table>
+                <div class="row">
+                  <%= order_item.reserve.reserve_on %>
                 </div>
-            <% end %>
+              </div>
+              <div class="col text-start">
+                <div class="row">
+                  <h6>お届け先</h6>
+                </div>
+                <div class="row">
+                  <%= order_item.reserve.address.last_name%>  <%= order_item.reserve.address.first_name%>
+                  〒  <%= order_item.reserve.address.postal_code%>
+                </div>
+                <div class="row">
+                  <%= order_item.reserve.address.prefecture%>  <%=order_item.reserve.address.city%> <%= order_item.reserve.address.town%>  <%=order_item.reserve.address.extended_address%>
+                </div>
+              </div>
+            </div>
+            <%last_reserve_id = order_item.reserve.id%>
+          <%end%>
+            
+          <div class="row px-5 border border-secondary">
+            <table class="table table-hover table-bordered w-auto">
+              <thead>
+                <tr>
+                  <th>品名</th>
+                  <th>品種</th>
+                  <th>玉数(ランク)</th>
+                  <th>重量(kg)</th>
+                  <th>送料(円)</th>
+                  <th>単価(円)</th>
+                  <th>数量(個)</th>
+                </tr>
+              </thead>
+            
+              <tbody>
+                <tr>
+                  <td><%= order_item.name%></td>
+                  <td><%= order_item.variety%></td>
+                  <td><%= order_item.rank%></td>
+                  <td><%= order_item.weight%></td>
+                  <td><%= order_item.postage%></td>
+                  <td><%= order_item.price%></td>
+                  <td><%= order_item.quantity%></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
-</div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <%= render "shared/footer" %>
