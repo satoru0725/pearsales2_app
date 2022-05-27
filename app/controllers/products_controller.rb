@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
+  before_action :ensure_user, only: [:edit, :update, :destroy]
   def index
     @products_index = Product.all.order(created_at: :desc).includes(:user)
   end
@@ -51,6 +52,11 @@ class ProductsController < ApplicationController
     unless user_signed_in? || customer_signed_in?
       redirect_to action: :index
     end
+  end
+
+  def ensure_user
+    @user = User.find(params[:user_id])
+    redirect_to root_path unless current_user.id == @user.id
   end
 
   def product_collection_params

@@ -3,8 +3,13 @@
   <div class="border">
     <section id="information">
       <div class="container">
-        <h3 class="mb-3">マイページ</h3>
-        <p>ここには出店者様と、現在出店登録されている商品が表示されます。 </p>
+        <% if user_signed_in? && current_user.id == @user.id %>
+          <h3 class="mb-3">マイページ</h3>
+          <p>ここには出店者様の情報と、出店登録されている商品情報、販売履歴が表示されます。 </p>
+        <% else%>
+          <h3 class="mb-3">購入ページ</h3>
+          <p>ここには出店者様の情報と、商品が表示されます。 </p>
+        <% end %>
         <div class="row">
           <!-- 左側セクション -->
           <div class="col-md-6">
@@ -116,7 +121,7 @@
                         <% else %>
                           <td class="text-danger">停止中</td>
                         <% end %>
-                        <% if user_signed_in? %>
+                        <% if user_signed_in? && @user.id == current_user.id %>
                           <td><%= link_to '詳細', user_product_path(@user.id, product.id), class: "btn btn-success" %></td>
                           <td><%= link_to '編集', edit_user_product_path(@user.id, product.id), class: "btn btn-primary" %></td>
                           <td><%= link_to '削除', user_product_path(@user.id, product.id), method: :delete, class: "btn btn-secondary" %></td>
@@ -156,7 +161,7 @@
                           <td class="text-danger">停止中</td>
                         <% end %>
                         
-                        <% if user_signed_in? %>
+                        <% if user_signed_in? && @user.id == current_user.id %>
                           <td><%= link_to '詳細', user_product_path(@user.id, product.id), class: "btn btn-success" %></td>
                           <td><%= link_to '編集', edit_user_product_path(@user.id, product.id), class: "btn btn-primary" %></td>
                           <td><%= link_to '削除', user_product_path(@user.id, product.id), method: :delete, class: "btn btn-secondary" %></td>
@@ -183,12 +188,12 @@
 
 
 <div class="text-center py-2">
-<% if user_signed_in? %>
+<% if user_signed_in? && @user.id == current_user.id %>
   <%= link_to '商品の新規出品', new_user_product_path(@user.id), class: "btn btn-primary" %>
 <% end %>
 </div>
 
-<%if user_signed_in? %>
+<%if user_signed_in? && @user.id == current_user.id %>
   <div class="p-5 border">
     <div class="row">
       <div class="col-8">
@@ -216,6 +221,23 @@
                 <div class="row">
                   <%= order_item.reserve.address.prefecture%>  <%=order_item.reserve.address.city%> <%= order_item.reserve.address.town%>  <%=order_item.reserve.address.extended_address%>
                 </div>
+              </div>
+              <div class="col text-start">
+                <div class="row">
+                  <h6>送り主</h6>
+                </div>
+                <div class="row">
+                  <% @customer = order_item.reserve.customer%>
+                  <%= @customer.last_name%>  <%= @customer.first_name%>
+                  〒  <%= @customer.postal_code%>
+                </div>
+                <div class="row">
+                  <%= @customer.prefecture%>  <%= @customer.city%> <%= @customer.town%>  <%= @customer.extended_address%>
+                </div>
+              </div>
+              <div class="col">
+                <h6>備考</h6>
+                <%= order_item.reserve.remark %>
               </div>
             </div>
             <%last_reserve_id = order_item.reserve.id%>

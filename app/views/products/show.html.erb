@@ -51,13 +51,13 @@
           </section>
           <% if customer_signed_in? %>
             <td>
-              <p class="text-danger">購入する場合は、数量を入力して「add」ボタンを押してください。<br>お客様のカートに追加されます。</p>
+              <p class="text-danger">購入する場合は、数量を入力して「カートに追加」ボタンを押してください。<br>お客様のカートに追加されます。</p>
               <%= form_with model: @cart_item, url: add_item_path, method: :post, local: true do |f| %>
                 <%= f.hidden_field :product_id, value: @product.id %>
                   <%= f.label :数量 %>
                   <%= f.number_field :quantity %>
 
-                <%= f.submit "add" %>
+                <%= f.submit "カートに追加" %>
               <% end %>
             </td>
           <% else %>
