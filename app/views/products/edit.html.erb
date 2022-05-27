@@ -1,6 +1,7 @@
 <%= render "shared/header" %>
 
 <%= form_with model: [@user, @product], url: user_product_path(@user.id, params[:id]), local: true do |f| %>
+<%= render 'shared/error_messages', model: f.object %>
   <table class="table">
     <thead>
       <tr>
@@ -57,7 +58,7 @@
     </tbody>
   </table>
 
-  <div class="text-center">
+  <div class="text-center py-2">
     <%= f.submit '編集完了', class: 'btn btn-primary' %>
   </div>
 <% end %>

@@ -32,7 +32,7 @@
 						<%= f.label :address_id, "登録先の住所"%>
 					</div>
 					<div>
-						<%= f.collection_select(:address_id, @addresses, :id, :full_address ) %>
+						<%= f.collection_select(:address_id, @addresses, :id, :full_address, prompt:"登録した住所から選択してください" ) %>
 					</div>
 				</div>
 				<div class="col">

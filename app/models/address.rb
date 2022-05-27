@@ -17,7 +17,8 @@ class Address < ApplicationRecord
     validates :last_name_kana
   end
 
-  validates :phone_number, numericality: { only_integer: true }, length: { in: 10..11 }
+  validates :phone_number, numericality: { only_integer: true }, length: { in: 10..11 }, if: Proc.new { |address| address.phone_number.present?}
+  validates :fax_number, numericality: { only_integer: true }, length: { in: 10..11 }, if: Proc.new { |address| address.fax_number.present?}
 
   belongs_to :customer
   has_many :reserves
