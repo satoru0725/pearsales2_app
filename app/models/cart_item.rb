@@ -3,6 +3,6 @@ class CartItem < ApplicationRecord
   belongs_to :cart
 
   def sum_of_price
-    ( product.price + product.postage ) * quantity
+    (product.price + product.postage) * quantity
   end
 end

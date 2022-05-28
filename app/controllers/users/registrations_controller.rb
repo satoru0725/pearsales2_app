@@ -42,12 +42,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name, :last_name_kana, :first_name_kana, :shop_name, :phone_number, :fax_number, :postal_code, :prefecture, :city, :town, :extended_address])
+    devise_parameter_sanitizer.permit(:sign_up,
+                                      keys: [:last_name, :first_name, :last_name_kana, :first_name_kana, :shop_name, :phone_number, :fax_number, :postal_code,
+                                             :prefecture, :city, :town, :extended_address])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:last_name, :first_name, :last_name_kana, :first_name_kana, :shop_name, :phone_number, :fax_number, :postal_code, :prefecture, :city, :town, :extended_address])
+    devise_parameter_sanitizer.permit(:account_update,
+                                      keys: [:last_name, :first_name, :last_name_kana, :first_name_kana, :shop_name, :phone_number, :fax_number, :postal_code,
+                                             :prefecture, :city, :town, :extended_address])
   end
 
   # The path used after sign up.
@@ -59,7 +63,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-
-
-  
 end

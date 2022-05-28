@@ -49,9 +49,7 @@ class ProductsController < ApplicationController
   private
 
   def move_to_index
-    unless user_signed_in? || customer_signed_in?
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless user_signed_in? || customer_signed_in?
   end
 
   def ensure_user
@@ -61,10 +59,12 @@ class ProductsController < ApplicationController
 
   def product_collection_params
     params.require(:form_product_collection)
-    .permit(products_attributes: [:name, :variety, :rank, :weight, :price, :stock, :postage, :remark, :suspended]).merge(user_id: current_user.id)
+          .permit(products_attributes: [:name, :variety, :rank, :weight, :price, :stock, :postage, :remark,
+                                        :suspended]).merge(user_id: current_user.id)
   end
 
   def product_params
-    params.require(:product).permit(:name, :variety, :rank, :weight, :price, :stock, :postage, :remark, :suspended).merge(user_id: current_user.id)
+    params.require(:product).permit(:name, :variety, :rank, :weight, :price, :stock, :postage, :remark,
+                                    :suspended).merge(user_id: current_user.id)
   end
 end

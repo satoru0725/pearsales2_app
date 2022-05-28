@@ -7,14 +7,11 @@
         <p>登録されている配送先が表示されます。 </p>
         <% @addresses.each do |address|%>
           <div class="row">
-            <!-- 左側セクション -->
             <div class="col-md-10 border-bottom">
               <section id="shop">
                 <h4 class="mb-3">住所</h4>
-                <!-- 店舗情報の表 -->
                 <table class="table table-hover">
                   <tbody>
-                    
                     <tr>
                       <th>名前</th>
                       <td><%=address.last_name %>  <%=address.first_name %></td>
@@ -41,18 +38,11 @@
                     </tr>
                     <%= link_to '編集', edit_address_path(address.id), class: "btn btn-success" %>
                     <%= link_to '削除', address_path(address.id), method: :delete, class: "btn btn-danger me-2" %>
-
                   </tbody>
                 </table>
-                <!-- /店舗情報の表 -->
               </section>
             </div>
-            <!-- /左側セクション -->
-
-            
-          </div>
-
-          
+          </div>  
         <% end %>  
       </div>
     </section>

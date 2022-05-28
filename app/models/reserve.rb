@@ -1,5 +1,4 @@
 class Reserve < ApplicationRecord
-
   with_options presence: true do
     validates :reserve_on
     validates :total_price

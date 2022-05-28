@@ -11,13 +11,11 @@
     <%= form_with model: @customer, url: customer_registration_path, class: 'registration-main', local: true do |f| %>
       <div class="col-6 bg-white mx-auto p-5 border-top">
         <div class="row text-center border-bottom">
-          <p class="h4 p-3">出店者様情報入力</p>
+          <p class="h4 p-3">お客様情報入力</p>
         </div>
-
         <div class="row">
           <%= render 'shared/error_messages', model: f.object %>
         </div>
-    
         <div class="row py-1">
           <div>
             <label class="form-text">ニックネーム</label>
@@ -55,7 +53,6 @@
             <%= f.password_field :password_confirmation, class:"input-default", id:"password-confirmation", placeholder:"同じパスワードを入力して下さい" %>
           </div>
         </div>
-        
         <div class="row py-1">
           <div>
             <label class="form-text">お名前(全角)</label>
@@ -79,9 +76,8 @@
       </div>
       <div class="col-6 bg-white mx-auto p-5 border-top">
         <div class="row text-center border-bottom">
-          <h4>出店者様住所</h4>
+          <h4>お客様住所</h4>
         </div>
-
         <div class="row py-1">
           <div>
             <label class="form-text">郵便番号</label>
@@ -91,7 +87,6 @@
             <%= f.text_field :postal_code, class:"input-default", id:"postal-code", placeholder:"例）123-4567", maxlength:"8" %>
           </div>
         </div>
-
         <div class="row py-1">
           <div>
             <label class="form-text">都道府県</label>
@@ -101,7 +96,6 @@
             <%= f.text_field :prefecture, class:"input-default", id:"prefecture", placeholder:"例）東京都" %>
           </div>
         </div>
-
         <div class="row py-1">
           <div>
             <label class="form-text">市区町村</label>
@@ -111,7 +105,6 @@
             <%= f.text_field :city, class:"input-default", id:"city", placeholder:"例）渋谷区" %>
           </div>
         </div>
-
         <div class="row py-1">
           <div>
             <label class="form-text">町域</label>
@@ -121,7 +114,6 @@
             <%= f.text_field :town, class:"input-default", id:"town", placeholder:"例）桜丘町" %>
           </div>
         </div>
-
         <div class="row py-1">
           <div>
             <label class="form-text">以降の住所</label>
@@ -131,7 +123,6 @@
             <%= f.text_field :extended_address, class:"input-default", id:"extended_address", placeholder:"例）□□マンション△△号室" %>
           </div>
         </div>
-
         <div class="row py-1">
           <div>
             <label class="form-text">電話番号</label>
@@ -141,7 +132,6 @@
             <%= f.text_field :phone_number, class:"input-default", id:"phone_number", placeholder:"例）電話番号" %>
           </div>
         </div>
-
         <div class="row py-1">
           <div class='form-text-wrap'>
             <label class="form-text">FAX番号</label>
@@ -152,7 +142,6 @@
           </div>
         </div>
       </div>
-    
       <div class="col-6 bg-white mx-auto p-3 border-top border-bottom">
         <div class="text-center">
           <%= f.submit "会員登録" ,class:"btn btn-danger btn-lg" %>

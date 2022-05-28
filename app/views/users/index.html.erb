@@ -7,11 +7,9 @@
         <p>出店登録されているお店が表示されます。 </p>
         <% @users.each do |user|%>
           <div class="row">
-            <!-- 左側セクション -->
             <div class="col-md-5 border-bottom">
               <section id="shop">
                 <h4 class="mb-3">お店情報</h4>
-                <!-- 店舗情報の表 -->
                 <table class="table table-hover">
                   <tbody>
                     <tr>
@@ -29,16 +27,12 @@
 
                   </tbody>
                 </table>
-                <!-- /店舗情報の表 -->
               </section>
             </div>
-            <!-- /左側セクション -->
 
-            <!-- 中央セクション -->
             <div class="col-md-5 border-bottom">
               <section id="shop">
                 <h4 class="mb-3">取り扱い品種</h4>
-                <!-- 店舗情報の表 -->
                 <table class="table table-hover">
                   <tbody>
                     <% @products.where(user_id: user.id).distinct.pluck(:variety).each do |variety| %>
@@ -47,38 +41,25 @@
                       <td><%=variety %></td>
                     </tr>
                     <% end %>
-                    
-
                   </tbody>
                 </table>
-                <!-- /店舗情報の表 -->
               </section>
             </div>
-            <!-- /中央セクション -->
-
-            <!-- 右側セクション -->
             <div class="col-md-2 border-bottom">
               <section id="shop">
                 <h4 class="mb-3">↓こちらをCLICK</h4>
-                <!-- 店舗情報の表 -->
                 <table class="table table-hover">
                   <tbody>
-                      
                     <tr>
                       <td>
                         <%= link_to image_tag("shop1.png", class:"img-fluid"), user_path(user.id)%>
                       </td>
                     </tr>
-
                   </tbody>
                 </table>
-                <!-- /店舗情報の表 -->
               </section>
             </div>
-            <!-- /右側セクション -->
           </div>
-
-          
         <% end %>  
       </div>
     </section>

@@ -11,7 +11,7 @@ class CartsController < ApplicationController
   def add_item
     @cart_item ||= current_cart.cart_items.build(product_id: params[:product_id])
     @cart_item.quantity += params[:quantity].to_i
-    if  @cart_item.save
+    if @cart_item.save
       flash[:notice] = '商品が追加されました。'
       redirect_to my_cart_path
     else
@@ -45,5 +45,4 @@ class CartsController < ApplicationController
   def setup_cart_item!
     @cart_item = current_cart.cart_items.find_by(product_id: params[:product_id])
   end
-
 end

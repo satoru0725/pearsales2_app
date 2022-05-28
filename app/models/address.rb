@@ -1,7 +1,7 @@
 class Address < ApplicationRecord
-
   with_options presence: true do
-    validates :postal_code,format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Include hyphen(-) or Eenter a number in half-width' }
+    validates :postal_code,
+              format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Include hyphen(-) or Eenter a number in half-width' }
     validates :prefecture
     validates :city
     validates :town
@@ -17,13 +17,17 @@ class Address < ApplicationRecord
     validates :last_name_kana
   end
 
-  validates :phone_number, numericality: { only_integer: true }, length: { in: 10..11 }, if: Proc.new { |address| address.phone_number.present?}
-  validates :fax_number, numericality: { only_integer: true }, length: { in: 10..11 }, if: Proc.new { |address| address.fax_number.present?}
+  validates :phone_number, numericality: { only_integer: true }, length: { in: 10..11 }, if: proc { |address|
+                                                                                               address.phone_number.present?
+                                                                                             }
+  validates :fax_number, numericality: { only_integer: true }, length: { in: 10..11 }, if: proc { |address|
+                                                                                             address.fax_number.present?
+                                                                                           }
 
   belongs_to :customer
   has_many :reserves
 
   def full_address
-    "〒" + self.postal_code + "　住所:" + self.prefecture + "" + self.city + "" + self.town + "" + self.extended_address + "　名前:" + self.last_name + "" + self.first_name
+    '〒' + postal_code + '　住所:' + prefecture + '' + city + '' + town + '' + extended_address + '　名前:' + last_name + '' + first_name
   end
 end
